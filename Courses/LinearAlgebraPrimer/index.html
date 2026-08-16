@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style>
+/* center the blockquote in the page */
+.blockquote-wrapper {
+   display: flex;
+   height: 25vh;
+   padding: 0 5px;
+}
+
+/* Blockquote main style */
+.blockquote {
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+    max-width: 620px;
+    margin: auto;
+    align-self: center;
+}
+
+/* Blockquote header */
+.blockquote h1 {
+    font-family: 'Abril Fatface', cursive;
+    position: relative; /* for pseudos */
+    color: #01193D;
+    font-size: 2.8rem;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    border: 2px solid #01193D;
+    border: solid 2px;
+    border-radius:20px;
+    padding: 25px;
+}
+
+/* Blockquote right double quotes */
+.blockquote h1:after {
+    content:"";
+    position: absolute;
+    border: 2px solid #01193D;
+    border-radius: 0 50px 0 0;
+    width: 60px;
+    height: 60px;
+    bottom: -62px;
+    left: 50px;
+    border-bottom: none;
+    border-left: none;
+    z-index: 3; 
+}
+
+.blockquote h1:before {
+    content:"";
+    position: absolute;
+    width: 80px;
+    border: 8px solid #01193D;
+    bottom: -3px;
+    left: 50px;
+    z-index: 2;
+}
+
+/* increase header size after 600px */
+@media all and (min-width: 600px) {
+    .blockquote h1 {
+        font-size: 3rem;
+        line-height: 1.2;
+   }
+
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+    position: relative;
+    color: #01193D;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+    padding-top: 15px;
+    z-index: 1;
+    margin-left:150px;
+    padding-left:12px;
+}
+
+ 
+.blockquote h4:first-letter {
+  margin-left:-10px;
+}
+body {
+  margin: 0;
+  background: white;
+  min-width: 960px;
+  color:  #01193D;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: none;
+  stroke-width: 2.5px;
+}
+
+
+.pos_right {
+  position: absolute;
+  /*top: 140px;*/
+  color: darkGrey;
+  text-align: center;
+}
+
+.right {
+  position: absolute;
+  right: 0px;
+  color: darkGrey;
+  top: 140px;
+}
+
+.left {
+  position: absolute;
+  left: 0px;
+}
+
+
+
+ul.circle {
+    list-style-type: circle;
+}
+
+.center {
+    position: relative;
+  /*  left:0;
+    right:0;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    /*background-color: #b0e0e6;*/
+}
+
+/*.center {
+    display: inline-block;
+}
+*/
+.col {
+  float:left;
+  text-align: center;
+  display: inline-block;
+
+}
+
+div#navigation{
+  text-align: center
+}
+
+ul.nav {
+  list-style-type: none;
+  margin: 5px;
+  padding:10px;
+  display: inline-block;
+}
+li.nav {
+  float: left;
+  padding: 10px;
+}
+
+
+a.nav:link, a.nav:visited {
+  display:block;
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+  font-weight: bold;
+  color: white;
+  background-color: #01193D;
+  text-align:center;
+  font-size: 20px;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover, a:active {
+  background-color: dimdGrey;
+}
+
+/*body {
+    text-align: center;
+}*/
+
+.button {
+  display: block;
+  width: 500px;
+  height: 300px;
+  background: black;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  vertical-align: center;
+}
+
+.MainImage {
+    background-image:url(MathematologyBorder.png);
+    height: 471px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 100%;
+}
+
+.whitespace {
+    background-color: #01193D;
+    height: 200px;
+    background-size: 100% auto;
+    width: 100%;
+}
+
+
+
+</style>
+<head>
+  <title>A Primer on Linear Algebra for Data Science </title>
+  </head>
+<body>
+
+
+
+
+<div class="whitespace">
+  <span style="verticle-align:top;padding:50px ;color : white; font-size: 50px; "  class="left"   > A Primer on Linear Algebra for Data Science</font></span> 
+       <span style="verticle-align:bottom; padding-right:50px; color : white; font-size: 30px; " class="right"   > Shaina Race, PhD </font></span> 
+  </div> 
+
+
+
+          
+<div id="navigation">
+    <ul class="nav">
+      <li class="nav"><a href="../../index.html" title="home" class="nav">Home</a></li>
+      <li class="nav"><a href="../index.html" title="courses" class="nav">Courses</a></li>
+      <li class="nav"><a href="../../ramblings/index.html" title="ramblings" class="nav">Ramblings</a></li>
+<!--      </br>
+      <li class="nav"><a href="index.html" title="home" class="nav">Home</a></li>
+      <li class="nav"><a href="courses/index.html" title="courses" class="nav">Courses</a></li>
+      <li class="nav"><a href="ramblings/index.html" title="ramblings" class="nav">Ramblings</a></li> -->
+    </ul>
+</div> 
+
+
+<div style="text-align: center; width: 800px; margin: 0 auto;">
+  <p style="display: inline-block;"> <h3> This primer is meant to instill a working knowledge of matrix terminology, arithmetic, and basic operations. The purpose is to lay the groundwork for advanced
+  data mining techniques like Principal Component Analysis, Singular Value Decomposition, Factor Analysis, Multidimensional Scaling, Correspondence Analysis, Network Analysis, Support Vector Machines and many more. In order to fully comprehend these important tools and techniques, we need to understand the language in which they are presented: Linear Algebra. This is NOT a rigorous proof-based mathematics course. It is a surface level introduction to the most important definitions and concepts that we will need in order to tackle the more advanced material. 
+<br/>
+<br/>
+<br/>
+<br/>
+
+<mark>How to take this course:</mark> If you have some previous training in Linear Algebra, you are encouraged to attempt the worksheets associated with each tutorial prior to watching the tutorial. If you can confidently answer every question on the worksheet (and you are comfortable discussing the Key Terms), then you are not required to watch the associated tutorial!
+ </h3></p>
+
+
+  <!-- Don't believe me that Linear Algebra is important for data analysis? Perhaps this <a href="link" ><span class="in">blog post</span></a> can convince you otherwise! -->
+ <!--  http://blog.revolutionanalytics.com/2011/05/the-neflix-prize-big-data-svd-and-r.html -->
+<!-- http://www.benfrederickson.com/distance-metrics/?hn=1
+ -->  
+</div>
+
+<table border="1" style="width: 800px; height: 1000px; vertical-align: center; text-align: center; margin: auto;">
+  <tbody>
+    <tr style="height: 27.5px;">
+      <td style="background-color: #01193D;"><span style="color: white;">Topic</span></td>
+      <td style="background-color: #01193D; width: 127.9px;"><span style="color: white;">Tutorial</span></td>
+      <td style="background-color: #01193D; width: 101.067px;"><span style="color: white;">Slides </span></td>
+      <td style="background-color: #01193D; width: 127.3px;"><span style="color: white;">Worksheet</span></td>
+      <td style="background-color: #01193D; width: 101.067px;"><span style="color: white;">List of Key Terms </span></td>
+    </tr>
+    <tr>
+      <td>Introduction to LA
+      Notation and Terminology<br/>
+        Part 1 <br/>
+      (Chapter 1)</td>
+      
+<!-- /media/video.mp4 -->
+
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=nAjNKJia6Uk">Tutorial 1 (mp4)</a></strong></br>
+
+      <td><a href="Slides/Introduction_To_Linear_Algebra.pdf">Chapter 1</a></td>
+      <td><a href="LAWorksheets/Lecture1_Worksheet.pdf">Worksheet 1</a><br/>
+          <a href="Solutions/solution1.pdf">Solution</a></td>
+      <td>  </td>
+
+    </tr>
+   <tr>
+      <td>Introduction to LA
+      Notation and Terminology<br/>
+      Part 2 <br/>
+      (Chapter 1)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=aIdKxUT3ZtU">Tutorial 2 (mp4)</a></strong></br>
+      <td><a href="Slides/Introduction_To_Linear_Algebra.pdf">Chapter 1</a></td>
+      <td><a href="LAWorksheets/Lecture2_Worksheet.pdf">Worksheet 2</a><br/>
+          <a href="Solutions/solution2.pdf">Solution</a></td>
+      <td><a href="LAWorksheets/Intro_KeyTerms.pdf">Chapter 1</a> </td>
+
+    </tr>
+     <tr>
+      <td>Matrix Arithmetic<br />
+      Part 1<br/>
+      (Chapter 2)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=YShe502fuTg">Tutorial 3 (mp4)</a></strong></br>
+      <td><a href="Slides/Arithmetic_Notes.pdf">Chapter 2</a></td>
+      <td><a href="LAWorksheets/Lecture3_Worksheet.pdf">Worksheet 3</a><br/>
+          <a href="Solutions/solution3.pdf">Solution</a></td>
+      <td></td>
+
+    </tr>
+     <tr>
+     <td>Matrix Arithmetic<br />
+      Part 2<br/>
+      (Chapter 2)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=hNjdyeZP9YQ">Tutorial 4 (mp4)</a></strong></br>
+
+      <td><a href="Slides/Arithmetic_Notes.pdf">Chapter 2</a></td>
+      <td><a href="LAWorksheets/Lecture4_Worksheet.pdf">Worksheet 4</a><br/>
+          <a href="Solutions/solution4.pdf">Solution</a><br/><p></p>
+          <a href="LAWorksheets/ChallengeHints.pdf">Challenge Problem and Hints</a>
+        </td>
+      <td><a href="LAWorksheets/Arithmetic_KeyTerms.pdf">Chapter 2</a> </td>
+
+    </tr>
+ 
+
+
+    <tr> <td colspan="5"> <a style="color: red" href=""> TAKE QUIZ 1 - (coming soon)</a> </td> </tr>
+
+
+
+
+       <tr>
+      <td>Applications of 
+      Matrix Multiplication<br/>
+      (Chapter 3)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=rXFprQMAS40">Tutorial 5 (mp4)</a></strong></br>
+       
+      <td><a href="Slides/Applications_of_Matrix_Multiplication.pdf">Chapter 3</a></td>
+      <td><a href="LAWorksheets/Lecture5_Worksheet.pdf">Worksheet 5</a> <br/>
+          <a href="Solutions/solution5.pdf">Solution</a></td>
+      <td></td>
+
+    </tr>
+       <tr>
+      <td>Solving Systems
+      of Equations<br/>
+      Part 1 <br/>
+      (Chapter 4)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=3TVw_ZZecq0">Tutorial 6 (mp4)</a></strong></br>
+
+      <td><a href="Slides/SolvingSystems.pdf">Chapter 4</a></td>
+      <td><a href="LAWorksheets/Lecture6_Worksheet.pdf">Worksheet 6</a><br/>
+          <a href="Solutions/solution6.pdf">Solution</a></td>
+      <td></td>
+
+    </tr>
+         <tr>
+      <td>Solving Systems
+      of Equations<br/>
+      Part 2 <br/>
+      (Chapter 4)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=dpz5gIQYvfw">Tutorial 7 (mp4)</a></strong></br>
+      
+      <td><a href="Slides/SolvingSystems.pdf">Chapter 4</a></td>
+      <td><a href="LAWorksheets/Lecture7_Worksheet.pdf">Worksheet 7</a><br/>
+          <a href="Solutions/solution7.pdf">Solution</a></td>
+      <td></td>
+
+    </tr>
+         <tr>
+      <td>Solving Systems
+      of Equations<br/>
+      Part 3 <br/>
+      (Chapter 4)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=EwFNHBY29QA">Tutorial 8 (mp4)</a></strong></br>
+
+      <td><a href="Slides/SolvingSystems.pdf">Chapter 4</a></td>
+      <td><a href="LAWorksheets/Lecture8_Worksheet.pdf">Worksheet 8</a><br/>
+          <a href="Solutions/solution8.pdf">Solution</a></td>
+      <td></td>
+
+    </tr>
+
+<tr>
+      <td>Row-Reduction
+      Using Software<br/>
+      (Optional)
+      
+      <td><strong><a href="LAWorksheets/Row_Reduction_in_R.pdf">PDF Tutorial </a></strong></td>
+      <td>  </td>
+      <td></td>
+      <td></td>
+
+    </tr>
+
+         <tr>
+      <td>Solving Systems
+      of Equations<br/>
+      Part 4 <br/>
+      (Chapter 4)</td>
+      
+      <td><strong><a href="LAVideos/Solving_Systems_Part_Four.mp4">Tutorial 9 (mp4)</a></strong></br>
+ 
+      <td><a href="https://www.youtube.com/watch?v=8nAssVAdmdE">Chapter 4</a></td>
+      <td><a href="LAWorksheets/Lecture9_Worksheet.pdf">Worksheet 9</a><br/>
+          <a href="Solutions/solution9.pdf">Solution</a></td>
+      <td><a href="LAWorksheets/SolvingSystems_KeyTerms.pdf">Chapter 4</a> </td>
+
+    </tr>
+
+ <tr>
+      <td>Solving Systems
+      of Equations<br/>
+      Optional: Additional Examples <br/>
+      (Chapter 4)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=jn58X4L4Hkk">Tutorial 10 (mp4)</a></strong></br>
+
+      <td><a href="Slides/Extra_Examples.pdf">Chapter 4</a></td>
+      <td>None</td>
+      <td> </td>
+
+    </tr>
+
+
+ <tr> <td colspan="5"> <a style="color: red" href="https://moodle-courses1819.wolfware.ncsu.edu/mod/quiz/view.php?id=7248"> TAKE QUIZ 2 - (coming soon)</a> </td> </tr>
+    
+  
+
+    <tr>
+      <td>Least Squares Solutions
+       <br/>
+      (Chapter 5)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=ZizDLSHENjI">Tutorial 11 (mp4)</a></strong></br>
+
+      <td><a href="Slides/Least_Squares.pdf">Chapter 5</a></td>
+      <td><a href="LAWorksheets/Lecture11_Worksheet.pdf">Worksheet 11</a><br/>
+          <a href="Solutions/solution11.pdf">Solution</a></td>
+      <td><a href="LAWorksheets/LeastSquares_KeyTerms.pdf">Chapter 5</a> </td>
+
+    </tr>
+
+    <tr>
+      <td>Rank and Linear Independence
+       <br/>
+      (Chapter 6)</td>
+      
+
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=8XA88vcnAKI">Tutorial 12 (mp4)</a></strong></br>
+
+      <td><a href="Slides/Rank_and_Linear_Independence.pdf">Chapter 6</a></td>
+      <td><a href="LAWorksheets/Lecture12_Worksheet.pdf">Worksheet 12</a><br/>
+          <a href="Solutions/solution12.pdf">Solution</a></td>
+      <td><a href="LAWorksheets/Rank_KeyTerms.pdf">Chapter 6</a> </td>
+
+    </tr>
+
+
+
+
+
+    <tr>
+      <td> More Properties of Matrix Arithmetic
+       <br/>
+      (Chapter 2)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=4DuGUY_ruPc">Tutorial 13 (mp4)</a></strong></br>
+      <td><a href="Slides/Advanced_Arithmetic.pdf">Chapter 2.5</a></td>
+      <td><a href="LAWorksheets/Lecture13_Worksheet.pdf">Worksheet 13</a><br/>
+          <a href="Solutions/solution13.pdf">Solution</a></td>
+      <td><a href="LAWorksheets/AdvancedArithmetic_KeyTerms.pdf">Chapter 2.5</a></td>
+
+    </tr>
+
+       <tr>
+      <td> Partitioned Matrix Multiplication
+       <br/>
+      (Chapter 2)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=PzcuGf_Jgi4">Tutorial 14 (mp4)</a></strong></br>
+
+      </td>
+
+      <td><a href="Slides/Advanced_Arithmetic.pdf">Chapter 2.5</a></td>
+      <td><a href="LAWorksheets/Lecture14_Worksheet.pdf">Worksheet 14</a><br/>
+          <a href="Solutions/solution14.pdf">Solution</a></td>
+      <td><a href="LAWorksheets/AdvancedArithmetic_KeyTerms.pdf">Chapter 2.5</a></td>
+
+    </tr>
+
+       <tr>
+      <td> Norms and Distance Measures
+       <br/>
+      (Chapter 7)</td>
+      
+      <td><strong><a href="https://www.youtube.com/watch?v=mXopeh2SBKw">Tutorial 15 (mp4)</a></strong></br>
+ 
+
+      </td>
+
+      <td><a href="Slides/NormsAndDistance.pdf">Chapter 7</a></td>
+      <td><a href="LAWorksheets/Lecture15_Worksheet.pdf">Worksheet 15</a><br/>
+          <a href="Solutions/solution15.pdf">Solution</a></td>
+      <td><a href="LAWorksheets/NormsAndDistance_KeyTerms.pdf">Chapter 7</a></td>
+
+    </tr>
+    <tr> <td colspan="5"> <a style="color: red" href=""> TAKE QUIZ 3 - (coming soon)</a> </td> </tr>
+    <tr><td colspan="5"><a style="color: white"> THIS LINE IS BLANK. because html.</td></tr>
+    <tr> <td colspan="5"> <a style="color: red" href="LAWorksheets/reviewPack1.pdf"> Review Packet For Final Assessment </a> </td> </tr>
+    <tr> <td colspan="5"> <a style="color: red" href="Solutions/solutionRP1.pdf"> Solutions to Review Packet </a> </td> </tr>
+
+   
+
+
+
+<tr> <td colspan="5"> <a style="color: red" href=""> TAKE LINEAR ALGEBRA PRIMER FINAL ASSESSMENT </a> </td> </tr>
+
+
+
+        <tr>
+      <td>
+       <br/>
+      </td>
+      
+      <td><strong></strong></td>
+      <td></td>
+      <td></td>
+      <td></td>
+
+    </tr>
+
+     
+
+  </tbody>
+</table>
+<div style="text-align: center; width: 800px; margin: 0 auto;">
+  <p style="display: inline-block;"> <h3> This class is supported by <a style="color: red" href="http://www.datacamp.com">DataCamp</a>, the most intuitive learning platform for data science. Learn R, Python and SQL the way you learn best through a combination of short expert videos and hands-on-the-keyboard exercises. Take over 100+ courses by expert instructors on topics such as importing data, data visualization or machine learning and learn faster through immediate and personalised feedback on every exercise.
+ </h3></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</body>
+</html> 
+
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+
+var width = Math.max(800, innerWidth);
+    height = 200;
+
+var i = 0;
+
+var svg = d3.select("#d3object").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .on("ontouchstart" in document ? "touchmove" : "mousemove", particle);
+
+function particle() {
+  var m = d3.mouse(this);
+
+  svg.insert("circle", "rect")
+      .attr("cx", m[0])
+      .attr("cy", m[1])
+      .attr("r", 1e-6)
+      .style("stroke", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke-opacity", 1)
+    .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr("r", 100)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+
+  d3.event.preventDefault();
+}
+
+</script>
