@@ -1,0 +1,19 @@
+cas;
+caslib _all_ assign;
+
+proc princomp data = public.testscores out = testPCs;
+	var _all_ ;
+run
+
+proc sgplot data = testPCs;
+	scatter x=prin1 y=prin2;
+run;
+
+proc princomp data = public.testscores out = testPCs cov;
+	var _all_ ;
+run
+
+proc sgplot data = testPCs;
+	scatter x=prin1 y=prin2;
+run;
+

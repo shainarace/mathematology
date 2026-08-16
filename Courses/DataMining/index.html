@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style>
+/* center the blockquote in the page */
+.blockquote-wrapper {
+   display: flex;
+   height: 25vh;
+   padding: 0 5px;
+}
+
+/* Blockquote main style */
+.blockquote {
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+    max-width: 620px;
+    margin: auto;
+    align-self: center;
+}
+
+/* Blockquote header */
+.blockquote h1 {
+    font-family: 'Abril Fatface', cursive;
+    position: relative; /* for pseudos */
+    color: #01193D;
+    font-size: 2.8rem;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    border: 2px solid #01193D;
+    border: solid 2px;
+    border-radius:20px;
+    padding: 25px;
+}
+
+/* Blockquote right double quotes */
+.blockquote h1:after {
+    content:"";
+    position: absolute;
+    border: 2px solid #01193D;
+    border-radius: 0 50px 0 0;
+    width: 60px;
+    height: 60px;
+    bottom: -62px;
+    left: 50px;
+    border-bottom: none;
+    border-left: none;
+    z-index: 3; 
+}
+
+.blockquote h1:before {
+    content:"";
+    position: absolute;
+    width: 80px;
+    border: 8px solid #01193D;
+    bottom: -3px;
+    left: 50px;
+    z-index: 2;
+}
+
+/* increase header size after 600px */
+@media all and (min-width: 600px) {
+    .blockquote h1 {
+        font-size: 3rem;
+        line-height: 1.2;
+   }
+
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+    position: relative;
+    color: #01193D;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+    padding-top: 15px;
+    z-index: 1;
+    margin-left:150px;
+    padding-left:12px;
+}
+
+ 
+.blockquote h4:first-letter {
+  margin-left:-10px;
+}
+body {
+  margin: 0;
+  background: white;
+  min-width: 960px;
+  color:  #01193D;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: none;
+  stroke-width: 2.5px;
+}
+
+
+.pos_right {
+  position: absolute;
+  /*top: 140px;*/
+  color: darkGrey;
+  text-align: center;
+}
+
+.right {
+  position: absolute;
+  right: 0px;
+  color: darkGrey;
+  top: 140px;
+}
+
+.left {
+  position: absolute;
+  left: 0px;
+}
+
+
+
+ul.circle {
+    list-style-type: circle;
+}
+
+.center {
+    position: relative;
+  /*  left:0;
+    right:0;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    /*background-color: #b0e0e6;*/
+}
+
+/*.center {
+    display: inline-block;
+}
+*/
+.col {
+  float:left;
+  text-align: center;
+  display: inline-block;
+
+}
+
+div#navigation{
+  text-align: center
+}
+
+ul.nav {
+  list-style-type: none;
+  margin: 5px;
+  padding:10px;
+  display: inline-block;
+}
+li.nav {
+  float: left;
+  padding: 10px;
+}
+
+
+a.nav:link, a.nav:visited {
+  display:block;
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+  font-weight: bold;
+  color: white;
+  background-color: #01193D;
+  text-align:center;
+  font-size: 20px;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover, a:active {
+  background-color: dimdGrey;
+}
+
+/*body {
+    text-align: center;
+}*/
+
+.button {
+  display: block;
+  width: 500px;
+  height: 300px;
+  background: black;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  vertical-align: center;
+}
+
+.MainImage {
+    background-image:url(MathematologyBorder.png);
+    height: 471px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 100%;
+}
+
+.whitespace {
+    background-color: #01193D;
+    height: 200px;
+    background-size: 100% auto;
+    width: 100%;
+}
+
+
+
+</style>
+<head>
+  <title>Data Mining and Machine Learning </title>
+  </head>
+<body>
+
+
+
+
+<div class="whitespace">
+  <span style="verticle-align:top;padding:50px ;color : white; font-size: 60px; "  class="left"   > Data Mining and Machine Learning</font></span> 
+       <span style="verticle-align:bottom; padding-right:50px; color : white; font-size: 30px; " class="right"   > Shaina Race, PhD </font></span> 
+  </div> 
+
+
+
+          
+<div id="navigation">
+    <ul class="nav">
+      <li class="nav"><a href="../../index.html" title="home" class="nav">Home</a></li>
+      <li class="nav"><a href="/courses/index.html" title="courses" class="nav">Courses</a></li>
+      <li class="nav"><a href="/ramblings/index.html" title="ramblings" class="nav">Ramblings</a></li>
+<!--      </br>
+      <li class="nav"><a href="index.html" title="home" class="nav">Home</a></li>
+      <li class="nav"><a href="courses/index.html" title="courses" class="nav">Courses</a></li>
+      <li class="nav"><a href="ramblings/index.html" title="ramblings" class="nav">Ramblings</a></li> -->
+    </ul>
+</div> 
+
+
+<div style="text-align: center; width: 800px; margin: 0 auto;">
+  <p style="display: inline-block;"> <h3> 
+ </h3></p>
+<h1><align="center">Data Mining</h1>
+ 
+</div>
+
+
+
+<table border="1" style="width: 1000px; height: 200px; vertical-align: center; text-align: center;  margin-bottom: 3cm; margin-left: auto; margin-right: auto; color:#01193D; ">
+  <tbody>
+    <tr style="height: 27.5px;">
+      <td style="background-color: #01193D; width: 300px;"><span style="color: white;">Topic</span></td>
+      <td style="background-color: #01193D; width: 400px;"><span style="color: white;">Video</span></td>
+      <td style="background-color: #01193D; width: 300px;"><span style="color: white;">Slides + Notes</span></td>
+      <td style="background-color: #01193D; width: 400px;"><span style="color: white;">Code + Data </span></td>
+      <td style="background-color: #01193D; width: 300px;"><span style="color: white;">Exercises + Homework </span></td>
+    </tr>
+
+      <!-- ##################### -->
+
+    <tr bgcolor="MistyRose">
+      <td>Introduction to Data Mining <br/>
+        (Modeling Part I) 
+       <p style="font-size:12px"> <strong> (Self-paced by 10/5)</strong></p>
+      </td>
+      <td>
+        <a href="">Bias-Variance Tradeoff <br> (Train-Valid-Test) </a><br><br>
+        <a href="">Missing Values  </a><br><br>
+        <a href="">Transactional Data  </a><br><br>
+        <a href="">Variable Transformations  </a><br><br>
+      </td>
+      <td>
+        <a href="Slides/Introduction.pdf">Introduction</a>
+      </td>
+     <td></td>
+     <td><a href="Worksheets/Introduction.pdf"> Exercises</br>
+     <a href="Worksheets/IntroductionSolutions.pdf"> (Solutions)</td> 
+    </tr>
+
+
+
+
+     <tr >
+      <td>Association Analysis
+       <p style="font-size:8px">  </p>
+      </td>
+       <td>
+
+     
+      </td>
+      <td>
+        <a href="Slides/Association.pdf">Association</a></td>
+     <td>
+      <a href="Code/grocery.sas7bdat" download>Grocery Data (SAS)</a></br>
+      <a href="Code/MarketBasket" >Viya Code</a></br>
+      
+      <a href="Code/AssociationR.pdf">Association Analysis in R</a></br>
+      <a href="https://towardsdatascience.com/mba-for-breakfast-4c18164ef82b">Association Analysis in Python</a></br>
+            <!-- <a href="http://clarioanalytics.github.io/marketbasket/">Association Macro in Base SAS</a></br> -->
+
+      
+      
+      <a href="Code/groceries.csv">Grocery Data (.csv)</a></br>
+    
+     </td>
+     <td>
+      <a href="Worksheets/Association.pdf"> Exercises </a> </br>
+      <a href="Worksheets/AssociationSolutions.pdf"> (Solutions) </a> </br></br> 
+      <p> <b>Due BY 9/25 5pm:</b> </br>
+      <a href="Worksheets/AssociationHomework.pdf"> Homework </a></br>
+      <a href="Code/orderData.csv"> Homework Data (.csv) </a></br>
+      public.orderData2 (SAS Viya) </br>
+      <a href=""> Submit link </a>
+      <p> <b>Due BY 9/25 11:59pm:</b> </br>
+      <a href=""> Homework Quiz </a>
+     </td> 
+    
+
+    </tr> 
+
+ <!--
+   <tr >
+      <td>
+        Sequence Analysis 
+      </td>
+     <td>
+        <strong><a href="https://mediasite.wolfware.ncsu.edu/online/Login/SAML?ReturnUrl=%2fonline%2fCatalog%2fcatalogs%2fiaa-2020-fall-data-mining">Video </a></strong>
+      </td>
+      <td>
+        <a href="Slides/Sequence.pdf">Sequence</a></td>
+     <td>
+      <a href="Code/bankAccts.sas7bdat" download>Bank Products (SAS)</a></br>
+      <a href="Code/faultcodes.sas7bdat" download>FaultCodes Data (SAS)</a></br></br>
+
+      <a href="Code/SequenceR.pdf">Sequence Analysis in R</a></br>
+      <a href="Code/FaultCodes.Rdata">FaultCodes.Rdata</a></br></br>
+
+      <a href="Code/FaultCodes.Rdata">FaultCodes.Rdata</a></br>
+
+     </td>
+     <td>
+      <a href="Worksheets/Sequence.pdf"> Exercises </a> </br>
+      <a href="Worksheets/SequenceSolutions.pdf"> (Solutions) </a></br>
+     </td> 
+    
+
+    </tr> 
+    <tr></tr>
+
+      ##################### -->
+
+    <tr >
+      <td>Classification and Regression Trees (CART) Part 1
+        <p style="font-size:8px"> </p>
+      </td>
+      
+   <td>
+
+      </td>
+      <td>
+         
+      <a href="Slides/CARTs.pdf">CART</a> 
+      </td>
+     <td>
+<strong> Viya Demo 1 </strong><br>
+             <a href="Code/TelcoChurn.csv" download>Telco Churn(.csv)</a></br>
+
+      <a href="https://documentation.sas.com/?docsetId=casml&docsetTarget=viyaml_treesplit_details02.htm&docsetVersion=3.0&locale=en">Viya Tree Details</a> 
+     <br>
+     <a href="https://towardsdatascience.com/visualizing-decision-trees-with-python-scikit-learn-graphviz-matplotlib-1c50b4aa68dc"> A Python run-through </a>
+     </td>
+     
+     <td>
+     <a href="Worksheets/CART.pdf"> Exercises (#2,3,5,7,8) </a></br>
+      <a href="Worksheets/CARTSolutions.pdf"> (Solutions) </a></br></br> 
+
+     </td>  
+    </tr> 
+
+
+
+    <tr >
+      <td>Classification and Regression Trees (CART) Part 2
+       <p style="font-size:8px">  </p>
+      </td>
+      
+      <td>
+
+      </td>
+      <td>
+         
+       <a href="Slides/CARTs.pdf">CART</a> 
+      </td>
+     <td>
+   <strong> Viya Demo 2 </strong><br>
+       <a href="Code/breast_cancer.sas7bdat" download>Breast Cancer (SAS Dataset)</a></br>
+<strong> Demo 2 in R</strong><br>
+      <a href="Code/BCDesc.txt">Breast Cancer Descript'n (.txt)</a></br>
+      <a href="Code/DecisionTreesBC.pdf">Decision Trees in R</a></br>
+      <a href="Code/breast_cancer.Rdata">Breast Cancer (Rdata)</a></br></br>
+     
+     </td>
+     
+     <td>
+     <a href="Worksheets/CART.pdf"> Exercises (ALL problems) </a></br>
+      <a href="Worksheets/CARTSolutions.pdf"> (Solutions) </a></br></br> 
+
+      
+     <a href="Worksheets/CARTHomework.pdf"> Homework </a></br>
+      <a href="Code/bankData.csv" download> Homework Data (.csv) </a></br>
+      <a href="Code/bankData.RData" download> Homework Data (.RData) </a></br>
+      <a href="Code/BankDesc.txt"> Homework Data Dict. (.txt) </a></br> 
+           <a href=""> Submit link </a>
+      <p> <b>Due BY Friday 10/16 11:59pm:</b> </br>
+      <a href=""> Homework Quiz </a></br>
+
+     </td>  
+    </tr> 
+
+
+ <tr >
+      <td>Clustering Part 1</br>
+        k-means 
+        <p style="font-size:8px"></p>
+      </td>
+    <td>
+
+      </td>
+      <td>
+        <a href="Slides/Clustering.pdf">Clustering</a></br>
+        <!-- <a href="Slides/DimensionReduction.pdf">Dimension Reduction</a></br> -->
+      </td>
+     <td>
+      <a href="Code/Clustering.R" >Clustering in R (Code)</a></br>
+      
+
+      <a href="Code/adult.RData" download> Adult Data (.RData) </a></br>
+           <a href="Code/adult.csv" download> Adult Data (.csv) </a></br>
+
+
+     </td>
+     <td>
+     
+     </td> 
+    </tr>
+       <tr bgcolor="MistyRose"> 
+      <td>The Curse of Dimensionality
+     <p style="font-size:12px"> <strong> (self-paced by 10/9) </strong></p>
+    
+      </td>
+      
+      <td>
+        <a href="Videos/The Curse of Dimensionality.mp4">Curse of Dimensionality.mp4</a></td>
+      <td><a href="Slides/DimensionReduction.pdf"> Slides  </a>
+        
+      </td>
+     
+      <td>
+       </td> 
+       <td><a href="https://www.youtube.com/watch?v=-wv0vxVRGMY">Carl Sagan's Introduction to Flatland <br> (Just for fun)</a>
+       </td>
+</tr> 
+
+ <tr >
+      <td>Clustering Part 2</br>
+        Hierarchical Clustering
+
+      <p style="font-size:8px"> </p></td>
+   <td>
+
+      </td>
+       <td>
+         <a href="Slides/Clustering.pdf">Clustering</a> 
+      </td>
+     <td>
+   
+
+           <a href="Code/HierarchicalClustering.R" >HierarchicalClust using k-means<br> centroids in R (Adult data)</a></br><br>
+
+           <a href="Code/ClusteringInSAS.sas" >Clustering in SAS (code)</a></br>
+           <a href="Code/breast_cancer.sas7bdat" download>Breast Cancer (SAS Dataset)</a></br>
+
+
+     </td>
+     <td>
+     <a href="Worksheets/Clustering.pdf"> Exercises  </a></br>
+      <a href="Worksheets/ClusteringSolutions.pdf"> (Solutions) </a></br>
+      <a href="Worksheets/HCSol.PDF"> (Detail Solution Problem 2) </a></br></br> 
+
+
+     </td> 
+    </tr>
+   <td>Clustering Lab
+      <p style="font-size:8px"></p></td>
+   <td>
+        <a href=""> </a>
+      
+      </td>
+<td>
+<a href="Worksheets/ChooseAdventureLab.pdf"> Choose your Own Adventure - Clustering  </a></br>
+</td>
+<td>
+      <a href="Code/TeenSNS.sas7bdat" > TeenSNS Data (.sas7bdat) </a><br>(also in public library) <br>
+    <a href="Code/TeenSNS.csv" download> TeenSNS Data (.csv) </a><br>
+     <a href="Code/TeenSNS.RData" download> TeenSNS Data (.RData) </a><br>
+    <a href="Code/TeenSNSDescr.txt"> TeenSNS Description (.txt) </a></br><br></td>
+    <td> <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/quiz/view.php?id=648826"> Link to Submit Profiles </a><br>
+      <strong> One submission per team! </strong>
+
+    <tr >
+      <td>k-NearestNeighbor 
+        <p style="font-size:8px"></p>
+        
+      </td>
+        <td>
+
+      </td>
+       <td>
+      
+        <a href="Slides/KNN.pdf">kNN</a></br></br>
+       
+        
+
+     <td>
+      <a href="Code/PenDigitTrain.sas7bdat" download> PenDigitTrain (SAS) </a></br>
+      <a href="Code/PenDigitTest.sas7bdat" download> PenDigitTest (SAS) </a></br>
+      <a href="Code/PenDigitDescr.txt"> PenDigit Description (.txt) </a></br></br>
+
+      <a href="Code/kNNBaseSAS.pdf"> kNN in Base SAS (.pdf) </a></br></br>
+
+
+        <a href="Code/kNN.pdf">kNN in R</a></br>
+      <a href="Code/PenDigits.Rdata">PenDigits.Rdata</a></br>
+     </td>
+     <td><a href="Worksheets/kNN.pdf"> kNN Exercises</br>
+          <a href="Worksheets/kNNSolutions.pdf"> (kNN Solutions)</br></br>
+
+
+          </td> 
+    </tr> 
+
+ 
+     
+
+   <tr bgcolor="MistyRose">
+      <td>Modeling Part II 
+       <p style="font-size:12px"> <strong> (self-paced by 10/19) </strong></p>
+     <td>
+
+      </td>
+     <td><a href="Slides/ModelEvaluation.pdf">Model Evaluation</a></br>
+        </br></td>
+     <td></td>
+     <td><a href="Worksheets/ModelAssessment.pdf"> Exercises </a></br>
+      <a href="Worksheets/ModelAssessmentSolutions.pdf"> (Solutions) </a>
+     </td>  
+    </tr> 
+
+    <!-- ##################### -->
+
+     <tr>
+      <td>  
+        Ensemble Models
+ <p style="font-size:8px"></p>
+         <td>
+
+      </td>
+     <td>
+        <a href="Slides/EnsembleModels.pdf">Ensemble Models</a></td>
+     <td>
+   
+  <a href="Code/TelcoChurn.csv" download>Telco Churn(.csv)</a></br>
+
+     </td>  
+     <td>
+     </td> 
+    </tr> 
+        <!-- ##################### -->
+        <tr>
+      <td>  
+        Review 
+ <p style="font-size:8px"></p>
+        <td>
+       
+      </td>
+        <td><a href="Slides/JeopardyReview21solutions.pdf" >Review Slides (with solutions)</a></td>
+   
+     <td></td> 
+     </br>
+  
+
+     </td>  
+     <td>
+     </td> 
+    </tr> 
+
+  <tr>
+       <td colspan="5" bgcolor = "yellow"><a style="color: dark red; font-size: 12px"  href=""> Exam Open Monday 10/19 <br> Due Friday 10/23 11:59pm</a> </br>
+     You may use any notes  but may not accept exam-specific help from another person</td> 
+ 
+    </tr>
+
+        <tr bgcolor="LightBlue">
+      <td>  
+        Ensemble Clustering <br>
+ (Faculty Workshop - 10/1)
+        <td>
+        <a href=""> Recording</a>
+      </td>
+        <td><a href="Slides/ConsensusClustering.pdf" >Consensus Clustering</a></td>
+    <td>
+      <a href="Code/ConsensusClustering.R" >R Code</a></br> 
+
+      <a href="Code/adult.RData" download> Adult Data (.RData) </a></br>
+           <a href="Code/adult.csv" download> Adult Data (.csv) </a></br>
+
+
+     </td>
+     <td>
+     </td> 
+    </div>
+</table>
+
+<div style="text-align: center; width: 800px; margin: 0 auto;">
+  <p style="display: inline-block;"> <h3> 
+ </h3></p>
+<h1><align="center"> Machine Learning </h1></div>
+
+
+<table border="1" style="width: 1100px; height: 800px; vertical-align: center; text-align: center;  margin-bottom: 3cm; margin-left: auto; margin-right: auto; ">
+  <tbody>
+    <tr style="height: 27.5px;">
+      <td style="background-color: black; width: 300px;"><span style="color: white;">Topic</span></td>
+      <td style="background-color: black; width: 200px;"><span style="color: white;">Video</span></td>
+      <td style="background-color: black; width: 200px;"><span style="color: white;">Slides + Notes</span></td>
+      <td style="background-color: black; width: 200px;"><span style="color: white;">Code + Data </span></td>
+      <td style="background-color: black; width: 200px;"><span style="color: white;">Exercises + Homework </span></td>
+    </tr>
+
+  
+  
+
+
+ <tr>
+<td colspan="5">
+ <a >MODELING COMPETITION  </a></br>
+        <a href="Code/MLProjectData21.RData">.RData (Train, Valid, Test) </a></br></br>           
+
+        <a href="Code/MLProject21_train.csv" download>.csv Training Data  </a></br>
+        <a href="Code/MLProject21_valid.csv" download>.csv Validation Data  </a></br>
+        <a href="Code/MLProject21_test.csv" download>.csv Test Data (for submission) </a></br></br>
+
+        <a href="Code/projectDescription.rtf">Project Description  </a></br>
+        <a href="Code/sampleSubmission.csv">Sample Submission  </a>
+</td>
+</tr>
+   
+ 
+   <tr>
+      <td>Bagging </br> and </br> Random Forests 
+      </td>
+      
+       <td>
+
+      </td>
+      <td>
+        <a href="Slides/RandomForests.pdf" >Random Forests </a></br>
+        <a href="https://bradleyboehmke.github.io/HOML/random-forest.html" >Reference Text</a></br>
+      </td>
+     <td>
+      <a href="Code/RandomForests.pdf">Random Forests in R (.pdf)</a></br>
+      <a href="Code/randomForests.R">Random Forests in R (Code)</a></br></br>
+
+      <a href="Code/PenDigits.Rdata">PenDigits.Rdata</a></br></br>
+      <a href="Code/PenDigitTrain.sas7bdat" download> PenDigitTrain (SAS) </a></br>
+      <a href="Code/PenDigitTest.sas7bdat" download> PenDigitTest (SAS) </a></br>
+      <a href="Code/PenDigitDescription.pdf"> PenDigit Description (.txt) </a></br></br>
+
+      <a href=" https://towardsdatascience.com/random-forest-in-python-24d0893d51c0">Python Tutorial</a>
+    </td> 
+
+     <td><a href="Worksheets/RFandGBM.pdf">Exercises (#1a-f, 2, 3)</a></br>
+      <a href="Worksheets/RFandGBMSolutions.pdf">(Solutions)</a></br>
+      
+     
+   </td>
+    </tr>
+     
+ 
+ <tr>
+      <td>Boosting </br>
+        Gradient Boosting </br>
+      </td>
+      
+       <td>
+
+       </td>
+      <td>
+        <a href="Slides/GradientBoosting.pdf" >Gradient Boosting</a></br></br>
+        <a href="https://bradleyboehmke.github.io/HOML/gbm.html#xgboost" >Reference Text</a></br>
+        
+        </td>
+     <td>
+      <a href="Code/GradientBoosting.pdf">Gradient Boosting in R</a></br>
+
+
+      <a href="https://www.datacamp.com/community/tutorials/xgboost-in-python"> Python Tutorial</a>
+
+   </td>
+     <td>
+     <a href="Worksheets/RFandGBM.pdf">Exercises</a></br>
+      <a href="Worksheets/RFandGBMSolutions.pdf">(Solutions)</a>
+     
+   </td>
+    </tr>
+
+     
+
+
+
+    <tr>
+      <td>Regularized Regression</br>
+        Ridge and LASSO
+ </td>
+    
+      <td>
+        <a href="Slides/Regularization.pdf">Regularized Regression</a>
+      </td>
+     <td>
+      <a href="Code/RidgeLasso.pdf">Ridge/Lasso in R (.pdf)</a></br>
+      <a href="Code/RidgeLasso.R">Ridge/Lasso in R  (Code)</a></br>
+      <a href="Code/Hitters.Rdata"> Hitters Data (Rdata)</a></br>
+      <a href="Code/HittersDesc.txt">Hitters Description</a></br>
+      <a href="Code/hitters.sas7bdat"> Hitters Data (SAS) </a></br></br>
+      <a href="https://www.analyticsvidhya.com/blog/2016/01/complete-tutorial-ridge-lasso-regression-python/"> Python Tutorial </a>
+
+     </td>
+     <td><a href="Worksheets/Regularization.pdf"> Exercises </a></br>
+     <a href="Worksheets/RegularizationSolutions.pdf"> (Solutions)</td>  
+    </tr> 
+
+     
+      
+    <tr >
+      <td>Neural Networks
+      </td>
+      
+      <td>
+
+      </td>
+      <td>
+        <a href="Slides/NeuralNetworks.pdf">Neural Networks</a></br></br>
+        <a href=" https://mattmazur.com/2015/03/17/a-step-by-step-backpropagation-example/">Backpropogation Example </br> (Requires Calculus)</a></br>
+
+       <a href="https://www.youtube.com/watch?v=Ilg3gGewQ5U">Backpropogation Video (3blue 1brown)</a></br>
+      </td>
+     <td>
+      <a href="Code/NeuralNetworks.pdf" >Neural Networks in R</a></br>
+      <a href="Code/concrete.sas7bdat" download> Concrete Data (SAS) </a></br>
+      <a href="Code/concrete.RData" download> Concrete Data (.RData) </a></br>
+      <a href="Code/ConcreteDescr.txt"> Concrete Description (.txt) </a></br>
+     </td>
+     <td>
+      <a href="Worksheets/NeuralNetworkExercises.pdf"> Exercises </a> </br>
+      <a href="Worksheets/NeuralNetworksSolution.pdf"> (Solutions) </a> </br>
+     </td> 
+    </tr> 
+
+
+
+  
+ 
+<tr bgcolor="firebrick">
+<td colspan="5">
+  <br>
+  <a href="" style="color:lightblue; font-weight:bold; font-size:24px ""> MIDTERM QUIZ (ML Topics 1-4 PLUS k-means clustering)  </a></br>
+        
+        <a style="color:lightblue; font-weight:bold; font-size:24px"></a> <br><br>
+</td>
+</tr> 
+
+
+
+         
+
+
+    <tr>
+      <td>Support Vector Machines (SVM)</br> and Kernels
+      </td>
+      
+  <td>
+       
+  </td>
+      <td><a href="Slides/SVMs.pdf" >Support Vector Machines</a></td>
+     <td>
+      <a href="Code/SVMgridsearch.R" >SVM + Grid Search (R Code)</a></br>
+      <a href="Code/SVM.pdf" >SVM + Grid Search in R (.pdf)</a></br>
+      
+      <a href="Code/churn.Rdata" >Customer Churn (Rdata)</a></br>
+      <a href="Code/churntrain.sas7bdat" >Customer Churn Train (SAS)</a></br>
+      <a href="Code/churntest.sas7bdat" >Customer Churn Train (SAS)</a></br>
+     <a href="http://www.svm-tutorial.com/2014/10/support-vector-regression-r/" >Support Vector Regression in R</a></br></td>
+ <td><a href="Worksheets/SVM.pdf" >Exercises</a></br>
+ <a href="Worksheets/SVMsolutions.pdf" >(Solutions)</a></td> 
+    </tr> 
+
+           
+ <!--
+
+    <tr>
+      <td>Generalized Additive Models </br>
+        (GAMs)
+      </td>
+      
+      
+<td>
+      <a href="">Orange Recording<br> </a>
+        <a href="">Blue Recording </a>
+</td>
+      <td><a href="Slides/MARSandGAM.pdf" >GAMs </a></br>
+        <a href="https://multithreaded.stitchfix.com/assets/files/gam.pdf" >Reference (using R)</a></br></br>
+        Read Chapter 7 in ISL
+      </td>
+     <td>
+      <a href="Code/GAMS.R" >GAMS (R Code)</a></br>
+      
+      <a href="Code/churn.Rdata" >Customer Churn (Rdata)</a></br>
+      <a href="Code/concrete.RData" >Concrete (RData)</a></br></br>
+     <a href="https://codeburst.io/pygam-getting-started-with-generalized-additive-models-in-python-457df5b4705f" >GAMs in Python</a></br>
+     </td>
+ <td><a href="Worksheets/" >NO Exercises</a></br>
+ <a href="Worksheets/" >(NO Solutions)</a></td> 
+    </tr> 
+    ##################### -->
+  
+    <tr>
+      <td>Naive Bayes Classifier </td>
+       <td>
+              
+  </br></td>
+      <td><a href="Slides/NaiveBayes.pdf">Naive Bayes </a></td>
+     <td> <a href="Code/NaiveBayes.pdf">Naive Bayes in R (.pdf) </a> </br> 
+     <a href="Code/SMS_tdm.Rdata">SMS Data (.RData)</a></br>
+     <a href="Code/SMSspam_NaiveBayes.R">Naive Bayes in R (.R) </a> </br> 
+     <a href="Code/smsPCAdemo.R">PCA Intro to SMS Data (.R)</a> </br> 
+   </td>
+     <td><a href=""> </td> 
+    </tr>  
+
+     
+    
+
+    <tr>
+      <td>
+     <strong> Model Agnostic Interpretability</strong></br>
+        Individual Conditional Expectation (ICE)</br>
+      Partial Dependence (PDP)</br>
+      Permutation Variable Importance
+       
+</br>
+      </td>
+      
+  <td>
+
+  </td>
+      <td><a href="Slides/Interpretability.pdf" >Model Interpretability</a></br></br>
+        <a href="https://christophm.github.io/interpretable-ml-book/" >Online Textbook</a></br>
+      </td>
+     <td>
+      <a href="Code/Boston.R" >Code to create plots from Slides</a></br>
+      </td>
+      
+
+ <td><a href="" ></a></br>
+ <a href="" ></a></td> 
+    </tr> 
+        <tr>
+      <td>
+     <strong> Model Agnostic Interpretability</strong></br>
+        Accumulated Local Effects (ALE)</br>
+      LIME</br>
+      Shapley Values
+       
+</br>
+      </td>
+      
+  <td>
+
+
+  </td>
+      <td><a href="Slides/Interpretability.pdf" >Model Interpretability</a></br></br>
+        <a href="https://christophm.github.io/interpretable-ml-book/" >Online Textbook</a></br>
+      </td>
+     <td>
+      <a href="Code/Boston.R" >Code to create plots from Slides</a></br>
+      </td>
+      
+
+ <td><a href="" ></a></br>
+ <a href="" ></a></td> 
+    </tr> 
+                   
+ <!--
+
+    <tr>
+      <td>
+      </br>
+   
+   Practical Considerations with </br>Machine Learning Models </br></br>
+        Jim Box (SAS, MSA14)  </br> 
+        Hiwot Tesfaye (SAS, MSA16)</br>
+        </br>
+      </td>
+         <td>
+   
+  <strong><a href="https://mediasite.wolfware.ncsu.edu/online/Login/SAML?ReturnUrl=%2fonline%2fPlay%2fd32309f54750467097f5c48d4e4f88e91d%3fcatalog%3dcfa675ae31c24dd78b4f89c1df3855d021">Video </a></strong>
+  
+      </td>
+       <td><a href="https://moodle-courses1920.wolfware.ncsu.edu/pluginfile.php/955213/mod_page/content/1/Practical%20Concerns%20with%20Machine%20Learning.pdf" >Practical Considerations with </br>Machine Learning Models </a>
+      
+<td><strong><a href="https://mediasite.wolfware.ncsu.edu/online/Login/SAML?ReturnUrl=%2fonline%2fCatalog%2fcatalogs%2fiaa-2020-fall-data-mining">Video </a></strong></td>
+      <td><a href="Slides/SVMs.pdf" >Slides (Printable Version)</a></td>
+     <td>
+      <a href="Code/SVMgridsearch.R" >SVM + Grid Search (R Code)</a></br>
+      <a href="Code/SVM.pdf" >SVM + Grid Search in R (.pdf)</a></br>
+      
+      <a href="Code/churn.Rdata" >Customer Churn (Rdata)</a></br>
+      <a href="Code/churntrain.sas7bdat" >Customer Churn Train (SAS)</a></br>
+      <a href="Code/churntest.sas7bdat" >Customer Churn Train (SAS)</a></br>
+     <a href="http://www.svm-tutorial.com/2014/10/support-vector-regression-r/" >Support Vector Regression in R</a></br></td>
+ <td><a href="Worksheets/SVM.pdf" >Exercises</a></br>
+ <a href="Worksheets/SVMsolutions.pdf" >(Solutions)</a></td> 
+    </tr> -->
+        <!-- ##################### -->
+ 
+<tr bgcolor="firebrick">
+<td colspan="5">
+  <br>
+  <a href="" style="color:lightblue; font-weight:bold; font-size:24px ""> FINAL QUIZ (ML Topics 5-8 PLUS Regularized Regression)  </a></br>
+        
+        <a style="color:lightblue; font-weight:bold; font-size:24px">DUE: FRIDAY 11/20 11:59PM </a> <br><br>
+</td>
+</tr> 
+        <tr bgcolor="LightBlue">
+      <td>  
+        Explainable Boosting Machine <br>
+ (Faculty Workshop - 4/1)
+        <td>
+        <a href="Videos/EBM.mp4"> Recording</a>
+      </td>
+        <td><a href="Slides/EBM.pdf" >Slides</a></td>
+    <td>
+      <a href="https://nbviewer.jupyter.org/github/interpretml/interpret/blob/master/examples/python/notebooks/Interpretable%20Classification%20Methods.ipynb" >notebook</a></br>
+
+  
+
+
+     </td>
+     <td>
+     </td> 
+    </tr> 
+
+
+            <!-- ##################### -->
+
+            <!-- ##################### -->
+
+
+   
+      
+     <!--  <td>
+        <strong><a href="https://mediasite.wolfware.ncsu.edu/online/Login/SAML?ReturnUrl=%2fonline%2fCatalog%2fcatalogs%2fiaa-2020-fall-data-mining">Video </a></strong></br>
+      </td>
+      <td>
+        <a href="Slides/AAEMTour.pptx">Slides (.pptx)</a>
+      </td>
+      <td>
+         <a href="Code/data.zip">AAEM Data</a>
+     </td>
+     <td>
+      <a href="https://moodle-courses1718.wolfware.ncsu.edu/mod/quiz/view.php?id=1588" style="color:green; font-weight:bold; font-size:24px">Final Quiz   (Due 11/19)</a></td> -->
+    
+ 
+   <!-- ##################### -->
+    <!-- 
+    <tr>
+      <td>Naive Bayes Classifier </br>
+        (Self Study)</td>
+       <td></br></td>
+      <td><a href="Slides/NaiveBayes.pdf">Slides (Printable Version)</a></td>
+     <td> <a href="Code/NaiveBayes.pdf">Naive Bayes in R </a> </br> 
+     <a href="Code/SMS_tdm.Rdata">SMS Data</a></td>
+     <td><a href=""> </td> 
+    </tr>  -->
+
+     
+    <!-- ##################### -->
+<!--  <tr>
+    </tr>
+     <tr >
+      <td>Dimension Reduction</b>
+         </br>and</br>
+        The Curse of Dimensionality</br>
+        (Lunch and Learn)</td>
+      <td>
+        
+      </td>
+      <td>
+         <a href="Slides/DimensionReduction.pdf">Slides (Printable Version)</a>
+      </td>
+      <td>
+        <a href=""></a>
+      </td>
+      <td>
+       </br>
+
+      </td>
+    </tr> -->
+ 
+      <!-- ##################### -->
+
+
+  </tbody>
+</table>
+
+
+
+
+  
+
+<!-- 
+
+<table border="1" style="width: 800px; height: 200px; vertical-align: center; text-align: center; margin: auto;">
+  <tbody>
+    <tr style="height: 27.5px;"> <td style="background-color: black; width: 600px;"><span style="color: white;">Additional Resources</span></td> </tr>
+       <tr><td> <a href="Slides/ModelSelectionCV.pdf"> Modelling part III - Model Selection via Cross Validation.</a> <a href="Code/CV Variable Selection.R"> R Code </a> <a href="Code/ameshousing.csv"> AmesHousing .csv </a> </td></tr>
+   
+  
+    <tr><td>    </td></tr>
+
+
+
+
+  </tbody>
+</table> -->
+
+
+
+
+
+
+<table border="1" style="width: 800px; height: 200px; vertical-align: center; text-align: center; margin: auto;">
+  <tbody>
+    <tr style="height: 27.5px;"> <td style="background-color: black; width: 600px;"><span style="color: white;">Cool Links</span></td> </tr>
+
+  <tr><td>
+    <a href="https://becominghuman.ai/cheat-sheets-for-ai-neural-networks-machine-learning-deep-learning-big-data-678c51b4b463"> Cheat Sheets for Open Source Data Science.</a>
+     </td> </tr>
+    <tr><td><a href="https://datasciencelab.wordpress.com/2013/12/27/finding-the-k-in-k-means-clustering/"> Finding the k in k-means with Python </a></td> </tr>
+    <tr><td><a href="https://pdfs.semanticscholar.org/e427/95688a276731132dbb1759e9c9370449d546.pdf">NbClust: An R Package for Determining the Relevant Number of Clusters in a Data Set </a></td> </tr>
+  <tr><td> <a href="http://tjo-en.hatenablog.com/entry/2014/01/06/234155"> Visualizing and Comparing Decision Boundaries of Classifiers.</a> Another example with code in iPython notebook format is <a href="http://nbviewer.jupyter.org/github/jgbos/iPython-Notebooks/blob/master/Comparing%20machine%20learning%20classifiers%20based%20on%20their%20hyperplanes%20or%20decision%20boundaries.ipynb"> here.</a></td></tr>
+    <tr><td> <a href="http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.24290&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification"> The Neural Network Playground.</a>   </td></tr>
+    <tr><td>  Tutorial on Sequence Analysis in R, including exploration using other variables (sequences by gender, for example)</br><a href="http://analyzecore.com/2014/12/04/sequence-carts-in-depth-analysis-with-r/"> Part 1 (Sequence Analysis and Plots).</a> </br>
+    <a href="http://analyzecore.com/2014/12/27/sequence-carts-in-depth-analysis-with-r-clustering/"> Part 2 (Clustering).</a> </br>
+    <a href="http://www.r-bloggers.com/sequence-of-shopping-carts-in-depth-analysis-with-r-sequence-of-events/"> Part 3 (Advanced Analysis).</a>    </td></tr>
+    <tr><td>    </td></tr>
+    <tr><td>   <a href="http://www.datacamp.com"> DataCamp Tutorials/Courses</a>  </td></tr>
+    <tr><td> <a href= 'https://www.analyticsvidhya.com/blog/2016/01/complete-tutorial-ridge-lasso-regression-python/'>Complete (teachy) Regularized Regression Tutorial Python</a>  </td></tr>
+    <tr><td>  <a href='https://www.linkedin.com/pulse/intro-statistical-learning-chptr-01-garth-zoller/'> The Illustrated Cliff Notes for Introduction to Statistical Learning Textbook. </a>  </td></tr>
+<tr><td>  <a href='https://machinelearningmastery.com/gradient-boosting-with-scikit-learn-xgboost-lightgbm-and-catboost/'> Gradient Boosting with Scikit-Learn, XGBoost, LightGBM, and CatBoost. </a>  </td></tr>
+
+
+
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+	</body>
+</html> 
+
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8" ></script>
+<script>
+
+var width = Math.max(800, innerWidth);
+    height = 200;
+
+var i = 0;
+
+var svg = d3.select("#d3object").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .on("ontouchstart" in document ? "touchmove" : "mousemove", particle);
+
+function particle() {
+  var m = d3.mouse(this);
+
+  svg.insert("circle", "rect")
+      .attr("cx", m[0])
+      .attr("cy", m[1])
+      .attr("r", 1e-6)
+      .style("stroke", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke-opacity", 1)
+    .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr("r", 100)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+
+  d3.event.preventDefault();
+}
+
+</script>

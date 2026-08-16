@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style>
+
+/* center the blockquote in the page */
+.blockquote-wrapper {
+   display: flex;
+   height: 25vh;
+   padding: 0 5px;
+}
+
+/* Blockquote main style */
+.blockquote {
+    position: relative;
+    font-family: 'Barlow Condensed', sans-serif;
+    max-width: 620px;
+    margin: auto;
+    align-self: center;
+}
+
+/* Blockquote header */
+.blockquote h1 {
+    font-family: 'Abril Fatface', cursive;
+    position: relative; /* for pseudos */
+    color: #01193D;
+    font-size: 2.8rem;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    border: 2px solid #01193D;
+    border: solid 2px;
+    border-radius:20px;
+    padding: 25px;
+}
+
+/* Blockquote right double quotes */
+.blockquote h1:after {
+    content:"";
+    position: absolute;
+    border: 2px solid #01193D;
+    border-radius: 0 50px 0 0;
+    width: 60px;
+    height: 60px;
+    bottom: -62px;
+    left: 50px;
+    border-bottom: none;
+    border-left: none;
+    z-index: 3; 
+}
+
+.blockquote h1:before {
+    content:"";
+    position: absolute;
+    width: 80px;
+    border: 8px solid #01193D;
+    bottom: -3px;
+    left: 50px;
+    z-index: 2;
+}
+
+/* increase header size after 600px */
+@media all and (min-width: 600px) {
+    .blockquote h1 {
+        font-size: 3rem;
+        line-height: 1.2;
+   }
+
+}
+
+/* Blockquote subheader */
+.blockquote h4 {
+    position: relative;
+    color: #01193D;
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+    padding-top: 15px;
+    z-index: 1;
+    margin-left:150px;
+    padding-left:12px;
+}
+
+ 
+.blockquote h4:first-letter {
+  margin-left:-10px;
+}
+body {
+  margin: 0;
+  background: white;
+  min-width: 960px;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: none;
+  stroke-width: 2.5px;
+}
+div#navigation{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.pos_right {
+  position: absolute;
+  /*top: 140px;*/
+  color: darkGrey;
+  text-align: center;
+}
+
+.right {
+  position: absolute;
+  right: 0px;
+  color: darkGrey;
+  top: 140px;
+}
+
+.left {
+  position: absolute;
+  left: 0px;
+}
+
+ul.nav {
+  list-style-type: none;
+  margin: 5px;
+  padding:10px;
+  display: inline-block;
+}
+li.nav {
+  float: left;
+  padding: 10px;
+}
+
+ul.navC {
+  list-style-type: none;
+  margin: 5px;
+  padding:10px;
+
+}
+li.navC {
+  /*float: left;*/
+  padding: 10px;
+}
+
+
+
+ul.circle {
+    list-style-type: circle;
+}
+
+.center {
+    position: relative;
+  /*  left:0;
+    right:0;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    /*background-color: #b0e0e6;*/
+}
+
+/*.center {
+    display: inline-block;
+}
+*/
+.col {
+  float:left;
+  text-align: center;
+  display: inline-block;
+
+}
+
+
+a.nav:link, a.nav:visited {
+  display:block;
+  width: 200px;
+  height: 100px;
+  line-height: 100px;
+  font-weight: bold;
+  color: white;
+  background-color: #01193D;
+  text-align:center;
+  font-size: 20px;
+  padding: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+a.navC:link, a.navC:visited {
+  display:block;
+  width: 225px;
+  height: 100px;
+  line-height: 25px;
+  font-weight: bold;
+  color: #01193D;
+  background-color: #01ce50;
+  text-align:center;
+  font-size: 20px;
+  padding: 20px 10px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover, a:active {
+  background-color: dimdGrey;
+}
+
+/*body {
+    text-align: center;
+}*/
+
+.button {
+  display: block;
+  width: 500px;
+  height: 300px;
+  background: black;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  vertical-align: center;
+}
+
+.MainImage {
+    background-image:url(MathematologyBorder.png);
+    height: 471px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 100%;
+}
+
+.whitespace {
+    background-color: #01193D;
+    height: 200px;
+    background-size: 100% auto;
+    width: 100%;
+}
+
+
+
+
+</style>
+<title> Mathematology | Courses </title>
+<body>
+
+
+
+          
+<!-- <div id="sitemenu-container">
+<div id="sitemenu">
+    <div id="page-container">
+      <div id="page">
+        <div id="page-top" class="has-logo has-title no-tagline"> -->
+          
+<div class="whitespace">
+  <span style="verticle-align:top;padding:50px ;color : white; font-size: 80px; "  class="left"   > Mathematology </font></span> 
+       <span style="verticle-align:bottom; padding-right:50px; color : white; font-size: 30px; " class="right"   > Shaina Race, PhD </font></span> 
+  </div> <!-- </div></div> -->
+
+
+<div id='breaker', style='background: #01193D; height:10px'></div>
+</br>
+<div id="navigation">
+    <ul class="nav">
+      <li class="nav"><a href="../index.html" title="home" class="nav">Home</a> </li>
+      <li class="nav"><a href="/courses/index.html" title="courses" class="nav">Courses</a></li>
+      <li class="nav"><a href="/ramblings/index.html" title="ramblings" class="nav">Ramblings</a></li>
+<!--      </br>
+      <li class="nav"><a href="index.html" title="home" class="nav">Home</a></li>
+      <li class="nav"><a href="courses/index.html" title="courses" class="nav">Courses</a></li>
+      <li class="nav"><a href="ramblings/index.html" title="ramblings" class="nav">Ramblings</a></li> -->
+    </ul>
+</div> 
+
+<div id='breaker2', style='background: #01193D; height:10px'></div>
+</br>
+<div id="navigationC" style='display:inline-block;'>
+    <ul class="navC">
+      <li class="navC"><a href="LinearAlgebraPrimer/index.html" title="Linear Algebra\n Primer" class="navC"></br>Linear Algebra </br> Primer</a> <p > </p> </li>
+      <li class="navC"><a href="LinearAlgebra/index.html" title="Linear Algebra for Data Science" class="navC"></br>Linear Algebra for Data Science</a></li>
+      <li class="navC"><a href="DataMining/index.html" title="Data Mining and Machine Learning" class="navC"></br>Data Mining and Machine Learning</a></li>
+      <li class="navC"><a href="SNA/index.html" title="Social Network Analysis" class="navC"></br>Social Network Analysis</a></li>
+<!--      </br>
+      <li class="nav"><a href="index.html" title="home" class="nav">Home</a></li>
+      <li class="nav"><a href="courses/index.html" title="courses" class="nav">Courses</a></li>
+      <li class="nav"><a href="ramblings/index.html" title="ramblings" class="nav">Ramblings</a></li> -->
+    </ul>
+</div> 
+<div style='display:inline-block; vertical-align: top; ; margin:0px; width:70%'>
+<ul style='display:inline-block;list-style-type: none;'>
+       <li style='float: left;'> <p style = 'display:block;height: 100px; padding: 20px 0px 20px;;'> A first course in linear algebra designed to instill a working knowledge of the language and operations of linear algebra. This is NOT a rigorous proof-based mathematics course. It is a surface level introduction to the most important definitions and concepts that we will need in order to tackle the more advanced material required for applied data science.</p> </li>
+        <li style='float: left;'> <p style = 'display:block;height: 100px; padding: 20px 0px 20px;'>
+        Norms, Bases, Orthogonality, Eigenvalues and Eigenvectors lay the foundation for discussion of Vector Space Models, Principal Components Analysis, and Factor Analysis by Matrix Factorization.</p> </li>
+        <li style='float: left;'> <p style = 'display:block;height: 100px; padding: 20px 0px 20px;'>
+        Fast-paced introduction to applied modeling, including supervised and unsupervised techniques, and model evaluation. Dimension reduction, clustering, association analysis, rare event modeling, regularization, decision trees, random forests, gradient boosting, model interpretability (SHAP, LIME, partial dependence, etc.) and many other topics    </p> </li>
+         <li style='float: left;'> <p style = 'display:block;height: 100px;padding: 20px 0px 20px;'>
+        Network terminology and visualization, descriptive analysis, centrality, community detection, hypothesis testing </p> </li>
+</ul>
+</div>
+
+
+
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+
+var width = Math.max(800, innerWidth);
+    height = 200;
+
+var i = 0;
+
+var svg = d3.select("#d3object").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .on("ontouchstart" in document ? "touchmove" : "mousemove", particle);
+
+function particle() {
+  var m = d3.mouse(this);
+
+  svg.insert("circle", "rect")
+      .attr("cx", m[0])
+      .attr("cy", m[1])
+      .attr("r", 1e-6)
+      .style("stroke", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke-opacity", 1)
+    .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr("r", 100)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+
+  d3.event.preventDefault();
+}
+
+</script>
+
+ 

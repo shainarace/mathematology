@@ -1,0 +1,87 @@
+cas;
+caslib _all_ assign;
+
+data hitters;
+set public.hitters;
+if salary ne .;
+run;
+/********************************************************************/
+/********************************************************************/
+/*************  PRINCIPAL COMPONENT REGRESSION   ********************/
+/********************************************************************/
+/********************************************************************/
+/*Determine the number of components to use via cross-validation.
+Since using all components is equivalent to using all variables exactly 
+as they are, it can be easy to overfit by using too many components.*/
+
+proc pls data=hitters method=pcr
+		cv=random(niter=10 seed=13);
+class league division;
+model salary = years walks runs rbi putouts league hmrun 
+			hits errors division cwalks cruns crbi chmrun
+			catbat atbat assists ;
+run;
+/*Once we determine the number of factors via cross-validation, we'll
+finalize our model using all the training data.*/
+
+proc pls data=hitters method=pcr nfac=4;
+class league division;
+model salary = years walks runs rbi putouts league hmrun 
+			hits errors division cwalks cruns crbi chmrun
+			catbat atbat assists / solution;
+run;
+
+/********************************************************************/
+/********************************************************************/
+/*********************  PARTIAL LEAST SQUARES   *********************/
+/********************************************************************/
+/********************************************************************/
+/*SVD algorithm is most accurate. May crawl for very large datasets.
+For large datasets, use the default which is the NIPALS algorithm.
+If performance is still too slow, consider setting a convergence 
+criteria (tolerance) epsilon =10^(-5) or decreasing the maxiter.*/
+/********************************************************************/
+proc pls data=hitters method=pls(algorithm=svd)
+		cv=random(niter=10 seed=13);
+class league division;
+model salary = years walks runs rbi putouts league hmrun 
+			hits errors division cwalks cruns crbi chmrun
+			catbat atbat assists;
+run;
+
+/*Once we determine the number of factors via cross-validation, we'll
+finalize our model using all the training data.*/
+
+proc pls data=hitters method=pls(algorithm=svd)
+		nfac=2;
+class league division;
+model salary = years walks runs rbi putouts league hmrun 
+			hits errors division cwalks cruns crbi chmrun
+			catbat atbat assists / solution;
+run;
+
+/********************************************************************/
+/********************************************************************/
+/************************  VARIABLE CLUSTERING   ********************/
+/********************************************************************/
+/********************************************************************/
+
+
+/* as you increase the maxeigen option, the coarseness of the clusters should increase*/
+/* in other words, the number of clusters found should decrease. */
+
+proc varclus data=public.hitters maxeigen=0.7;
+var years walks runs rbi putouts hmrun 
+			hits errors cwalks cruns crbi chmrun
+			catbat atbat assists;
+run;
+
+/********************************************************************/
+/********************************************************************/
+/*                     Try with the IPIP survey data:               */
+/********************************************************************/
+/********************************************************************/
+
+proc varclus data=public.ipip maxeigen=2;
+var e1--o10;
+run;

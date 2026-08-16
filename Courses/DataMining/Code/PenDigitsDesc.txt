@@ -1,0 +1,8 @@
+Goal: Automatic recognition of handwritten digits
+
+Data: Digit database of 250 samples from 44 writers. Subjects wrote digits in random order inside boxes of 500 by 500 tablet pixel resolution. Bounding box was then set around the handwritten digit (because we want to explore the path of the digit - it does not matter where that person started and finished the digit on the table, what matters is where the pen went in reference to it they started.) Spatial resampling done to obtain a constant number of regularly spaced points along the trajectory.
+(𝑥_1 , 𝑥_2) give the first point coordinate
+(𝑥_3 , 𝑥_4) give the second point coordinate 
+etc.
+A total of 16 variables are present in the data because 8 points were sampled along the path of the handwritten motion. 
+

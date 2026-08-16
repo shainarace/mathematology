@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style>
+
+body {
+  margin: 0;
+  background: white;
+  min-width: 960px;
+}
+
+rect {
+  fill: none;
+  pointer-events: all;
+}
+
+circle {
+  fill: none;
+  stroke-width: 2.5px;
+}
+div#navigation{
+  text-align: center
+}
+
+.pos_right {
+  position: absolute;
+  /*top: 140px;*/
+  color: darkGrey;
+  text-align: center;
+}
+
+.right {
+  position: absolute;
+  right: 0px;
+  color: darkGrey;
+  top: 140px;
+}
+
+.left {
+  position: absolute;
+  left: 0px;
+}
+
+ul.nav {
+  list-style-type: none;
+  margin: 10;
+  padding:0;
+  display: inline-block;
+}
+li.nav {
+  float: left;
+}
+
+
+
+ul.circle {
+    list-style-type: circle;
+}
+
+.center {
+    position: relative;
+  /*  left:0;
+    right:0;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    /*background-color: #b0e0e6;*/
+}
+
+/*.center {
+    display: inline-block;
+}
+*/
+.col {
+  float:left;
+  text-align: center;
+  display: inline-block;
+
+}
+
+
+a.nav:link, a.nav:visited {
+  display:block;
+  width: 120px;
+  font-weight: bold;
+  color: darkGrey;
+  background-color: black;
+  text-align:center;
+  padding: 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a:hover, a:active {
+  background-color: dimdGrey;
+}
+
+/*body {
+    text-align: center;
+}*/
+
+.button {
+  display: block;
+  width: 500px;
+  height: 300px;
+  background: black;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  vertical-align: center;
+}
+.MainImage {
+    background-image:url(MatrixBorder.png);
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    width: 100%;
+}
+
+
+
+</style>
+<head>
+  <title>MSA Linear Algebra </title>
+  </head>
+<body>
+
+<div class = "MainImage">
+      <span style="verticle-align:top;padding-bottom:300px " class="left" > <img src="iaaicon.png" width="200px"> </span> 
+<span style="verticle-align:bottom;padding:0px " class="right"  text-color="white" > <font size="7">Shaina Race, PhD </font></span> 
+    </div>
+
+
+
+</div>   
+<div id='breaker', style='background: black; height:10px'>
+</div>
+
+<div id="sitemenu-container">
+<div id="sitemenu">
+    <div id="page-container">
+      <div id="page">
+        <div id="page-top" class="has-logo has-title no-tagline">
+          
+<div id="navigation">
+    <ul class="nav">
+      <li class="nav"><a href="http://www4.ncsu.edu/~slrace/index.html" title="home" class="nav"><span class="in">HOME</span></a></li>
+      <!-- <li class="i2 e"><a href="talks.html" title="talks"><span class="in">TALKS</span></a></li> -->
+      <li class="nav"><a href="http://www4.ncsu.edu/~slrace/research.html" title="papers" class="nav"><span class="in">RESEARCH</span></a></li>
+    
+      <li class="nav"><a href="http://www4.ncsu.edu/~slrace/courses.html" title="courses" class="nav"><span class="in">COURSES</span></a></li>
+      <li class="nav"><a href="http://www4.ncsu.edu/~slrace/other.html" title="other" class="nav"><span class="in">OTHER STUFF</span></a></li>
+    </ul>
+  </div> 
+
+<div style="text-align: center; width: 800px; margin: 0 auto;">
+  <p style="display: inline-block;"> <h3> This course is meant to instill a working knowledge of linear algebra terminology and to lay the foundations of advanced data mining techniques like Principal Component Analysis, Singular Value Decomposition, Factor Analysis, Multidimensional Scaling, Correspondence Analysis, Network Analysis, Support Vector Machines and many more. We will cover as many of these methods as we can in the time we have. 
+
+  In order to fully comprehend these important tools and techniques, we need to understand the language in which they are presented: Linear Algebra. This is NOT a rigorous proof-based mathematics course. It is a surface level introduction to the most important definitions and concepts that are needed to understand these important data mining methodologies.
+<br/>
+<br/>
+<br/>
+<br/>
+
+ </h3></p>
+
+
+  <!-- Don't believe me that Linear Algebra is important for data analysis? Perhaps this <a href="link" ><span class="in">blog post</span></a> can convince you otherwise! -->
+ <!--  http://blog.revolutionanalytics.com/2011/05/the-neflix-prize-big-data-svd-and-r.html -->
+<!-- http://www.benfrederickson.com/distance-metrics/?hn=1
+ -->  
+</div>
+
+<table border="1" style="  vertical-align: center; text-align: center;  margin-bottom: 3cm; margin-left: auto; margin-right: auto; ">
+    <tbody>
+        <tr style="height: 27.5px;">
+            <td style="background-color: black;  width: 250.9px;"><span style="color: white;">Topic</span></td>
+            <td style="background-color: black;  width: 300.9px;"><span style="color: white;">Video Tutorials</span></td>
+
+            <td style="background-color: black; width: 130.9px; "><span style="color: white;">Slides + Notes</span></td>
+            <td style="background-color: black; width: 180.3px;"><span style="color: white;">Worksheet</span></td>
+            <td style="background-color: black; width: 180.067px;"><span style="color: white;">Code </span></td>
+            <td style="background-color: black; width: 120.067px;"><span style="color: white;">Assignments </span></td>
+        </tr>
+
+        <tr>
+            <td>Review of Introductory Material <br>(LA Bootcamp)</td>
+            <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=433999"> Scalar Multiplication and Addition (9:59)</a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=434001"> Matrix Multiplication (10:45) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=434002"> Special Matrices and Operations (5:31)</a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=434003"> Systems of Equations & Least Squares (11:51)</a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=434005"> Norms, Distances, Similarity (7:39)</a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=434004"> Covariance (12:58) </a></td>
+            <td><a href="Slides/LABootcamp.pdf"> Slides </a>
+                <br>
+                <a href="Slides/LABootcampNotes.pdf"> Printable Notes</a></td>
+            <td><a href="Worksheets/reviewPack2.pdf">Review Pack 2</a><br>
+
+                <a href="Solutions/solutionsRP2.pdf">Solutions</a></td>
+            <td></td>
+            <td></td>
+
+        </tr>
+        <tr>
+            <td>Spans, Bases, and Subspaces <br> (Class 0 and Class 1) </td>
+            <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=353106"> 1 - Spans and Subspaces (18:13) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=433973"> 2 - Coordinates and Bases (6:37) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=433983"> 3 - A Change of Basis (16:45) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=433991"> 4 - One Step Further (7:20) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=433996"> 5 - A More Complete Example (12:16) </a> <br>
+            </td>
+
+            <td><a href="Slides/SpanSubspaceBasis.pdf">Slides</a> <br>
+                <a href="Slides/SpanSubspaceBasisNotes.pdf">Printable Notes</a><br><br>
+                <a href="BookChapters/Basis.pdf">Textbook Chapter</a> </td>
+            <td><a href="Worksheets/Worksheet1.pdf">Worksheet 1</a><br>
+                <a href="Solutions/solution1.pdf">Solution</a></td>
+            <td></td>
+            <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/quiz/view.php?id=48124">Quiz 1</a> </td>
+        </tr>
+        <tr>
+            <td>Orthogonality <br> (Class 2)</td>
+            <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=438958"> 6 - Orthonormal Basis (8:12)</a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=451032"> 7 - Orthogonal Matrix (10:20) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=451033"> 8 - Orthogonal Projections (8:24) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=451323"> 9 - Regression as a Projection (8:35)</a> <br>
+            </td>
+            <td><a href="Slides/Orthogonality.pdf">Slides</a> <br>
+
+                <a href="Slides/OrthogonalityNotes.pdf">Printable Notes</a><br><br>
+                <a href="BookChapters/NormsOrthogonality.pdf">Textbook Chapter</a> </td>
+            <td><a href="Worksheets/Worksheet2.pdf">Worksheet 2</a><br>
+                <a href="Solutions/solution2.pdf">Solution</a></td>
+            <td><a href=""></a> </td>
+            <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/quiz/view.php?id=48125">Quiz 2</a></td>
+        </tr>
+
+
+    <tr>
+      <td>Eigenvectors and
+     <br>
+      Introduction to PCA  <br> (Class 3)
+      </td>
+        <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=438958"> 10 - Eigenvalues & Eigenvectors (9:16) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=451032"> 11 - EigenFacts (8:51)</a> <br>
+                 <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=507888"> 12 - Introduction to PCA (10:51)</a> <br>
+            </td>
+      <td><a href="Slides/Eigenspaces.pdf">Slides</a></br>
+        <a href="Slides/EigenspacesNotes.pdf">Printable Notes</a></br></br>
+        <a href="BookChapters/Eigenvalues.pdf">Textbook Chapter</a> </td>
+      <td><a href="Worksheets/Worksheet3.pdf">Worksheet 3</a><br/>
+          <a href="Solutions/solution3.pdf">Solution</a></td>
+       <td></td> 
+         <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/quiz/view.php?id=48126">Quiz 3</a></td> 
+</tr>
+  
+    <tr>
+      <td>Principal Components Analysis <br> (Class 4)</td>
+        <td><a href="Slides/2Ddata3Dworld.mp4"> 13 - 2-D data in a 3-D world (4:23) </a> <br>
+                <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=554589"> 14 - Eigenvalues Give Variance (13:35)</a> <br>
+                 <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=554591"> 15 - Loadings and Scores (5:29)</a> <br>
+                 <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=554592"> 16 - Covariance vs. Correlation PCA w/ SAS (20:23)</a> <br>
+            </td>
+      
+      <td><a href="Slides/PCA.pdf">Slides</a></br>
+        <a href="Slides/PCANotes.pdf">Printable Notes</a> </br></br>
+        <a href="RChapters/PCA.pdf">PCA in R Chapter</a> </br>
+        <a href="BookChapters/PCA.pdf">PCA Text Chapter</a> </td>
+      <td><a href="Worksheets/Worksheet4.pdf">Worksheet 4</a><br/>
+          <a href="Solutions/solution4.pdf">Solution</a></td>
+      <td>
+        <a href="Code/testscores.sas7bdat" download>TestScores SAS data</a></br>
+        <a href="Code/testPCA" >TestScores SAS code</a></br>
+       </td> 
+                <td><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/quiz/view.php?id=48127">Quiz 4</a></td>
+</tr>
+ 
+    <tr>
+      <td>Case Studies with PCA  <br> (Class 5)
+    
+      </td>
+      <td> <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=566153"> 17 - The BiPlot (UK Food) (10:44)</a><br>
+ <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=566154"> 18 - FIFA Soccer Players PCA (9:59) </a>
+        
+             </td> 
+      <td><a href="Slides/PCADemos.pdf">Slides</a> </td> 
+ <td>
+  <a href="Code/geneCancerUCI.RData" download> Cancer Gene Data</a></br> 
+        <a href="Code/cancerLAB.html">Cancer Gene LAB</a></br> 
+        <a href="Code/cancer.pdf">Cancer Gene SOLUTION</a></br> </br> 
+       
+  <a href="Code/StarWarsSurvey.RData">Star Wars Data</a><br/>
+        <a href="Code/StarWarsLab.pdf" >Star Wars LAB</a></br>
+      <a href="Code/StarWars.pdf" >Star Wars SOLUTION</a></br>
+
+          </td>
+
+        <td>
+       <a href="Code/testscores.csv" download>TestScores csv data</a></br>
+        <a href="Code/testscoresBiplot.html" >TestScores BiPlot</a></br>
+        </br>
+ 
+          <a href="Code/ukfood.csv" download>UKfood Data</a><br/>
+        <a href="Code/ukfood.pdf">UKfood Markdown .pdf</a><br/></br>
+        </br>
+  
+       <a href="Code/fifa.csv" download>FIFA .csv data</a></br>
+       <a href="Code/fifa.RData" download>FIFA .Rdata</a></br>
+       <a href="Code/FifaPCA.pdf" >FIFA Markdown .pdf</a></br>
+ 
+        </td>
+   
+            
+             <td> 
+              No Quiz! <br>
+         <a href="Worksheets/email.txt">TEAM HW Assignment</a></br></br></br>
+                          
+          <a href="Code/LeukError.RData">Homework data</a></br></br> 
+          (Email due 9/2 5pm)</br>
+        </td>
+</tr>
+ 
+     <tr>
+      <td>Factor Analysis via PC Rotations <br> (Class 6)
+      </td>
+      <td>
+ <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=571184"> 19 - PCA Recap (optional) (7:33)</a><br>
+ <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=571186"> 20 - Factor Analysis via PCA Rotations (23:32) </a>
+      </td>
+    
+      <td><a href="Slides/FactorAnalysis.pdf">Slides</a></br>
+        <!-- <a href="Slides/FactorAnalysisNotes.pdf">Printable Notes</a></br></br> -->
+        
+        <a href="BookChapters/FactorAnalysis.pdf">Factor Analysis Text Chapter</a></br></br>
+        <a href="RChapters/FactorAnalysis.pdf">Factor Analysis R Chapter</a>
+      </td>
+      <td><a href="Worksheets/Worksheet5.pdf">Worksheet 5</a><br/>
+          <a href="Solutions/solution5.pdf">Solution</a></td>
+      </br>
+<td>
+      <a href="Code/ipip.sas7bdat" download>Big5 SAS data</a></br> 
+          <a href="Code/IPIP.sas.txt" >Big5 SAS code</a></br></br>
+ <a href="Code/Big5.RData" download>Big5 RData</a></br>
+ <a href="RChapters/FactorAnalysis.pdf" >Big5 Markdown .pdf</a></br>
+      </td> 
+      <td>
+          <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/quiz/view.php?id=48128">Quiz 5</a></br></br>
+
+       </td>
+</tr>
+
+
+    <tr>
+    <td>
+        PCR: Principal Components Regression </br> 
+        <!-- PLS: Partial Least Squares  <br> <optional> proc varclus  <br> <br> -->
+         (Class 7)
+        
+      </td>
+       <td>
+ <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=577562"> 21 - Principal Components Regression (PCR) (7:25)</a><br>
+ <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/lti/view.php?id=577568"> 22 - Choosing the number of components (4:20) </a><br>
+ <a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/mediasite/view.php?id=577582"> 23 - PCR Example with Baseball Data (10:33) </a><br>
+  <a href="Videos/24 - PCR Example with Big Data.mp4"> 24 - &lt;optional&gt; PCR Example with BIG Data (6:00) </a><br>
+   <a href="Videos/25 - Partial Least Squares.mp4"> 25 - &lt;optional&gt; Partial Least Squares (PLS)  (5:17) </a><br>
+ 
+  <!--<a href=""> 24 - PLS Example with FIFA Data  () </a> -->
+      </td>
+      
+     
+      <td> <a href="Slides/PLS.pdf">Slides</a></br> 
+       <!--  <a href="Slides/PLSNotes.pdf">Printable Notes</a></br> </br> -->
+
+        <a href="http://faculty.marshall.usc.edu/gareth-james/ISL/"> ISL 6.7 Lab 3 </a>
+
+        
+      </td>
+      <td>
+      <a href="Worksheets/Worksheet6.pdf">Worksheet 6</a><br/>
+          <a href="Solutions/solution6.pdf">Solution</a>
+          </td>
+      <td>
+      	<a href="Code/hitters.sas7bdat" download> Baseball SAS Data</a><br>
+      	<a href="Code/Hitters.RData" download> Baseball .RData Data</a><br>
+      	<a href="Code/HittersPLS.sas.txt" >SAS (Viya) code - Baseball</a> </br><br>
+        <a href="Code/bigDataPCR.csv" download> BigData .csv Data</a> </br>
+        <a href="Code/bigDataPCR.RData" download> BigData .RData</a><br>
+        <a href="Code/BigDataPCRandPLS.txt" >SAS (Viya) code - BigData</a>
+        
+       </td> 
+        <td></br><a href="https://moodle-courses2021.wolfware.ncsu.edu/mod/quiz/view.php?id=48129">Quiz 6</a></br></br>
+          Read: ISL Sections 6.3 + 6.4</td> 
+</tr>
+<!--
+
+
+<tr>
+      <td>Singular Value Decomposition
+     <br/>
+    
+      </td>
+      
+      <td><a href="Slides/SVD.pdf"> Slides  </a></br>
+        <a href="Slides/SVDNotes.pdf"> Printable Notes  </a></br></br>
+        <a href="BookChapters/SVD.pdf">SVD Text Chapter</a></br>
+        <a href="RChapters/SVD.pdf">SVD in R Chapter</a>
+      </td>
+      <td><a href="Worksheets/Worksheet7.pdf">  </a><br/>
+          <a href="Solutions/solution7.pdf">  </a></td>
+      <td><a href="Code/images.R">images.R</a></br>
+        <a href="Code/MSA2020Photos.zip"> MSAPhotos </a>
+       </td> 
+       <td> NO Quiz! </td>
+</tr> -->
+<!--
+<tr> 
+      <td>Review
+     <br/>
+    
+      </td>
+      
+      <td><strong><a href="">(9/20)</a></strong></br>
+        <strong><a href=""></a></strong></td>
+      <td><a href="Slides/Jeopardy.pdf"> Review Jeopardy  </a></br>
+        <a href="Slides/JeopardySolutions.pdf"> With Solutions  </a>
+      </td>
+      <td></td>
+      <td>
+       </td> 
+</tr> -->
+
+<!-- <tr>
+      <td>Correspondence Analysis
+     <br/>
+    
+      (Chapter ?)</td>
+      
+      <td><strong><a href="">Lunch and Learn (mp4)</a></strong></br>
+        <strong><a href="">(html version)</a></strong></td>
+      <td><a href="">Correspondence Analysis</a></td>
+      <td></td>
+      <td><a href=""></a> </td>
+</tr> -->
+
+
+
+
+
+  </tbody>
+</table>
+
+
+<table border="1" style="width: 800px; height: 200px; vertical-align: center; text-align: center; margin: auto;">
+  <tbody>
+    <tr style="height: 27.5px;">
+      <td style="background-color: black;"><span style="color: white;">Topic</span></td>
+      <td style="background-color: black; width: 600px;"><span style="color: white;">Links</span></td>
+    </tr>
+    <tr><td>Principal Components Analysis </td>
+        <td><a href="http://blog.thehackerati.com/post/126701202241/eigenstyle"> Eigenstyle - The Principal Components of Dresses.</a>  Clever analyst attempts to build a machine to pick out dresses she will like on Amazon.com </br></br>
+        <a href="http://www.economist.com/blogs/gametheory/2014/09/analysing-football-styles"> A Different Ball Game.</a> Analyzing styles of play in football (soccer). </br></br>
+ <a href="http://fitbafancystats.blogspot.nl/2015/08/a-new-team-rating-for-scottish-football.html"> Advanced Statistical Analysis of the SPFL et al.</a> A new team rating for Scottish football (soccer), zeroing in on team strength as a latent variable. 
+
+        
+
+      </td> 
+    </tr>
+     <tr><td>Nonnegative Matrix Factorization</td>
+        <td><a href="https://matloff.wordpress.com/2016/03/05/quick-intro-to-nmf-the-method-and-the-r-package/"> Quick Intro to NMF, The method and the R package.</a>   </br></br>
+          </td>
+
+        
+       
+    </tr>
+    <tr><td>Singular Value Decomposition</td>
+        <td><a href="http://blog.revolutionanalytics.com/2011/05/the-neflix-prize-big-data-svd-and-r.html"> The Netflix Prize, Big Data, the SVD, and R.</a>   </br></br>
+          <a href="https://davetang.org/file/Singular_Value_Decomposition_Tutorial.pdf"> The "Most Basic" SVD tutorial on the market (by Kirk Baker). </a> 
+          </td>
+
+        
+       
+    </tr>
+    <tr><td>Distance Metrics Etc. </td>
+      <td> <a href="http://www.benfrederickson.com/distance-metrics/?hn=1"> Ben Federickson Explores Distance Metrics. </a>
+    </tr>
+     <tr><td>Useful Blogs and Webpages </td>
+      <td> <a href="https://shapeofdata.wordpress.com"> The Shape of Data.</a> Jesse Johnson explores MANY common analytical tools and explains them in relatively plain language.
+    </tr>
+
+
+
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</body>
+</html> 
+
+<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script>
+
+var width = Math.max(800, innerWidth);
+    height = 200;
+
+var i = 0;
+
+var svg = d3.select("#d3object").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .on("ontouchstart" in document ? "touchmove" : "mousemove", particle);
+
+function particle() {
+  var m = d3.mouse(this);
+
+  svg.insert("circle", "rect")
+      .attr("cx", m[0])
+      .attr("cy", m[1])
+      .attr("r", 1e-6)
+      .style("stroke", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke-opacity", 1)
+    .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr("r", 100)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+
+  d3.event.preventDefault();
+}
+
+</script>

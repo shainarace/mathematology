@@ -1,0 +1,707 @@
+---
+title: "Interpretability_Pres_Plots"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+## Loading Libraries
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+library("tidyverse")
+library("rpart")
+library("rpart.plot")
+library("rlist")
+library("gridExtra")
+library("randomForest")
+library("gbm")
+library("mgcv")
+library("pdp")
+library("ALEPlot")
+library("lime")
+library("iml")
+```
+
+# Background
+
+## Generating Data
+
+```{r}
+set.seed(4321)
+num_samples = 1000
+x = sort(rnorm(num_samples))
+eps = rnorm(1000, sd = 1.5)
+y = 4 - 2 * x + 0.5 * sin(pi * x) + eps
+y = (y - mean(y)) / sd(y)
+sim_data = data.frame(y, x)
+```
+
+## Linear Model
+
+```{r}
+
+reg_model = lm(y ~ x, data = sim_data)
+y_hat = predict(reg_model, sim_data)
+pred_data = data.frame(y_hat,x)
+
+
+ggplot(data = sim_data, aes(y = y,x = x)) + 
+  geom_point() +
+  geom_line(data = pred_data,
+            aes(y = y_hat,x = x),
+            colour = "red",
+            size = 1) +
+  theme_bw(base_size = 25)  
+
+```
+
+## Decision Tree
+
+```{r}
+
+tree_model = rpart(y ~ x, data = sim_data)
+y_hat = predict(tree_model, sim_data)
+pred_data = data.frame(y_hat,x)
+
+
+ggplot(data = sim_data, aes(y = y,x = x)) + 
+  geom_point() +
+  geom_line(data = pred_data,
+            aes(y = y_hat,x = x),
+            colour = "red",
+            size = 1) +
+  theme_bw(base_size = 25)  
+
+```
+
+```{r}
+
+rpart.plot(tree_model)
+
+```
+
+## Random Forest
+
+```{r}
+set.seed(8675309)
+forest_model = randomForest(y ~ x, data = sim_data, ntree = 500, maxnodes = 10)
+y_hat = predict(forest_model, sim_data)
+pred_data = data.frame(y_hat,x)
+
+
+ggplot(data = sim_data, aes(y = y,x = x)) + 
+  geom_point() +
+  geom_line(data = pred_data,
+            aes(y = y_hat,x = x),
+            colour = "red",
+            size = 1) +
+  theme_bw(base_size = 25)  
+
+```
+
+## Synthetic Data
+
+```{r}
+set.seed(90210)
+num_samples = 500
+x1 = rnorm(num_samples)
+x2 = rnorm(num_samples)
+x3 = rnorm(num_samples)
+x4 = rnorm(num_samples)
+eps = rnorm(1000, sd = 3)
+y = 4 * x1 - 2 * sin(pi*x2) + 3 * x3^2 + abs(x4) + eps
+y = (y - mean(y)) / sd(y)
+sim_data = data.frame(y, x1, x2, x3, x4)
+```
+
+## Plotting
+
+```{r}
+
+p1 = qplot(x1,y,data=sim_data) + theme_bw(base_size = 15)
+p2 = qplot(x2,y,data=sim_data) + theme_bw(base_size = 15)
+p3 = qplot(x3,y,data=sim_data) + theme_bw(base_size = 15)
+p4 = qplot(x4,y,data=sim_data) + theme_bw(base_size = 15)
+grid.arrange(p1,p2,p3,p4,nrow=2,ncol=2)
+
+```
+
+## GAM Model
+
+```{r}
+
+set.seed(1234)
+gam_model = gam(y ~ x1 + s(x2) + s(x3) + s(x4), data = sim_data)
+
+```
+
+## Plot Predictions wrt All Variables
+
+```{r}
+y_hat = predict(gam_model)
+pred_data = data.frame(y_hat,x1,x2,x3,x4)
+
+double_plot = function(var_name,size=15) {
+  plot = ggplot(data=sim_data,aes_string(x=var_name,y="y")) +
+    geom_point() +
+    geom_point(data=pred_data,aes_string(x=var_name,y="y_hat"),colour="red") +
+    theme_bw(base_size=size)
+  return(plot)
+}
+
+
+p1 = double_plot("x1")
+p2 = double_plot("x2")
+p3 = double_plot("x3")
+p4 = double_plot("x4")
+grid.arrange(p1,p2,p3,p4,nrow=2,ncol=2)
+
+```
+
+# ICE
+
+## Inspect x3
+
+```{r}
+
+ggplot(data=sim_data,aes(x=x3,y=y)) +
+  geom_point(size=2) +
+  geom_point(data=pred_data,aes(x=x3,y=y_hat),colour="red",size=2) +
+  theme_bw(base_size=25)
+
+```
+
+## Single Observation
+
+```{r}
+
+ggplot(data=sim_data,aes(x=x3,y=y)) +
+  geom_point(size=2, alpha=0.1) +
+  geom_point(data=pred_data,aes(x=x3,y=y_hat),colour="red",size=2, alpha=0.1) +
+  geom_point(data=sim_data[1,],aes(x=x3,y=y),size=5) +
+  geom_point(data=pred_data[1,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  theme_bw(base_size=25)
+
+```
+
+```{r}
+
+single_obs = pred_data[1,]
+write.table(single_obs, "clipboard", sep="\t", row.names=FALSE)
+
+x3_values = seq(-3,3,1)
+rep_obs = single_obs[rep(1,length(x3_values)),]
+rep_obs$x3 = x3_values
+rep_obs$yhat = predict(gam_model,rep_obs)
+write.table(rep_obs, "clipboard", sep="\t", row.names=FALSE)
+
+```
+
+## ICE for Observation 1
+
+```{r}
+
+x3_grid = seq(min(x3),max(x3),0.1)
+ice_data = sim_data[rep(1,length(x3_grid)),]
+ice_data$x3 = x3_grid
+ice_data$y_hat = predict(gam_model, ice_data)
+
+ggplot(data=sim_data,aes(x=x3,y=y)) +
+  geom_point(size=2, alpha=0.1) +
+  geom_point(data=pred_data,aes(x=x3,y=y_hat),colour="red",size=2, alpha=0.1) +
+  geom_point(data=sim_data[1,],aes(x=x3,y=y),size=5) +
+  geom_point(data=pred_data[1,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=ice_data,aes(x=x3,y=y_hat),colour="red",size=1) +
+  theme_bw(base_size=25)
+
+```
+
+## More ICE!
+
+```{r}
+
+x3_ice = function(model,obs) {
+  x3_grid = seq(min(x3),max(x3),0.1)
+  ice_data = sim_data[rep(obs,length(x3_grid)),]
+  ice_data$x3 = x3_grid
+  ice_data$y_hat = predict(model, ice_data)
+  return(ice_data)
+}
+
+ggplot(data=sim_data,aes(x=x3,y=y)) +
+  geom_point(size=2, alpha=0.1) +
+  geom_point(data=pred_data,aes(x=x3,y=y_hat),colour="red",size=2, alpha=0.1) +
+  geom_point(data=sim_data[1,],aes(x=x3,y=y),size=5) +
+  geom_point(data=pred_data[1,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(gam_model,1),aes(x=x3,y=y_hat),colour="red",size=1) +
+  geom_point(data=pred_data[2,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(gam_model,2),aes(x=x3,y=y_hat),colour="red",size=1) +
+  geom_point(data=pred_data[3,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(gam_model,3),aes(x=x3,y=y_hat),colour="red",size=1) + 
+  geom_point(data=pred_data[4,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(gam_model,4),aes(x=x3,y=y_hat),colour="red",size=1) + 
+  geom_point(data=pred_data[5,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(gam_model,5),aes(x=x3,y=y_hat),colour="red",size=1) +
+  theme_bw(base_size=25)
+
+```
+
+## More ICE, Forest
+
+```{r}
+set.seed(1234)
+forest_model = randomForest(y ~ x1 + x2 + x3 + x4,data=sim_data)
+forest_pred_data = pred_data
+forest_pred_data$y_hat = predict(forest_model,forest_pred_data)
+
+ggplot(data=sim_data,aes(x=x3,y=y)) +
+  geom_point(size=2, alpha=0.1) +
+  geom_point(data=forest_pred_data,aes(x=x3,y=y_hat),colour="red",size=2, alpha=0.1) +
+  geom_point(data=sim_data[1,],aes(x=x3,y=y),size=5) +
+  geom_point(data=forest_pred_data[1,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(forest_model,1),aes(x=x3,y=y_hat),colour="red",size=1) +
+  geom_point(data=forest_pred_data[2,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(forest_model,2),aes(x=x3,y=y_hat),colour="red",size=1) +
+  geom_point(data=forest_pred_data[3,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(forest_model,3),aes(x=x3,y=y_hat),colour="red",size=1) + 
+  geom_point(data=forest_pred_data[4,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(forest_model,4),aes(x=x3,y=y_hat),colour="red",size=1) + 
+  geom_point(data=forest_pred_data[5,],aes(x=x3,y=y_hat),colour="red",size=5) +
+  geom_line(data=x3_ice(forest_model,5),aes(x=x3,y=y_hat),colour="red",size=1) +
+  theme_bw(base_size=25)
+
+```
+
+# Partial Dependence
+
+```{r}
+
+write.table(pred_data[1:7,], "clipboard", sep="\t", row.names=FALSE)
+
+ex_data = pred_data[1:7,]
+ex_data$x3 = 0
+ex_data$y_hat = predict(gam_model, ex_data)
+
+
+```
+
+## Plot PD
+
+```{r}
+
+pd_data = partial(gam_model,pred.var = "x3", pred.grid = data.frame(x3=c(-3,-2,-1,0,1,2,3)))
+write.table(pd_data[1:7,], "clipboard", sep="\t", row.names=FALSE)
+
+pd_data = partial(gam_model,pred.var = "x3", plot.engine = "ggplot2")
+
+ggplot(data=sim_data,aes(x=x3,y=y)) + 
+  geom_point(size=2, alpha=0.1) +
+  geom_point(data=pred_data,aes(x=x3,y=y_hat),colour="red",size=2, alpha=0.1)  +
+  geom_line(data=pd_data,aes(x=x3,y=yhat),colour="red",size=1) +
+  theme_bw(base_size=25)
+
+```
+
+## All of the Partial Dependences
+
+```{r}
+
+pd_plot = function(model,var_name) {
+  plot_data = partial(model,pred.var = var_name, plot.engine = "ggplot2")
+  plot = ggplot(data=plot_data,aes_string(x=var_name,y="yhat")) +
+    geom_line(colour="red",size=1) +
+    theme_bw(base_size = 20)
+  return(plot)
+}
+
+p1 = pd_plot(gam_model,"x1")
+p2 = pd_plot(gam_model,"x2")
+p3 = pd_plot(gam_model,"x3")
+p4 = pd_plot(gam_model,"x4")
+
+grid.arrange(p1,p2,p3,p4)
+
+
+```
+
+## ALL PD, Forest
+
+```{r}
+
+p1 = pd_plot(forest_model,"x1")
+p2 = pd_plot(forest_model,"x2")
+p3 = pd_plot(forest_model,"x3")
+p4 = pd_plot(forest_model,"x4")
+
+grid.arrange(p1,p2,p3,p4)
+
+```
+
+## 2-Way Partial Dependence
+
+```{r}
+
+plot_data = partial(gam_model,pred.var = c("x2","x4"))
+ggplot(data=plot_data,aes(x=x2,y=x4,z=yhat,fill=yhat)) +
+  geom_raster() +
+  scale_fill_gradientn(colours=c("red","white")) +
+  theme_bw(base_size = 20)
+
+```
+
+# LIME
+
+## Setup Models in LIME
+
+```{r}
+
+
+model_type.gam = function(x, ...) { return("regression") }
+
+predict_model.gam = function(x, newdata, ...) {
+  pred = predict(x, newdata)
+  return(as.data.frame(pred))
+}
+
+model_type.randomForest = function(x, ...) { return("regression") }
+
+predict_model.randomForest = function(x, newdata, ...) {
+  pred = predict(x, newdata)
+  return(as.data.frame(pred))
+}
+
+```
+
+## Some LIME examples
+
+```{r}
+
+explainer = lime(sim_data,model = gam_model, bin_continuous = FALSE,use_density = FALSE)
+gam_explanations = explain(sim_data[1:4,c("x1","x2","x3","x4")],explainer,n_features = 4)
+
+plot_features(gam_explanations, ncol = 2)
+gam_explanations
+
+```
+
+## Plot LIME
+
+```{r}
+
+lime_line = function(model,data,point,feature) {
+
+  explainer = lime(data,model = model, bin_continuous = FALSE)
+  explanations = explain(data[point,c("x1","x2","x3","x4")],explainer,n_features = 4)
+  
+  intercept = explanations[explanations$feature == feature,"model_prediction"][[1]]
+  slope = explanations[explanations$feature == feature,"feature_weight"][[1]]
+  
+  plot_domain = seq(min(sim_data[,feature]),max(sim_data[,feature]),0.1)
+  exp_pred = (plot_domain - data[point,feature]) * slope + intercept
+
+  out = data.frame(feature = plot_domain, "yhat" = exp_pred)
+  names(out)[names(out) == "feature"] = feature
+
+  return(out)
+}
+
+plot_pd_lime = function(model, data, point, feature, alpha, plot_point, plot_lime) {
+  
+  pred_data = data
+  pred_data[,"yhat"] = predict(model,data)
+
+  partial_data = partial(model,pred.var = feature, plot.engine = "ggplot2")
+  partial_span = max(partial_data$yhat) - min(partial_data$yhat)
+  
+  plot = ggplot(data=partial_data,aes_string(x=feature,y="yhat"),size=2) +
+    geom_line(size=1) +
+    geom_point(data=pred_data,aes_string(x=feature,y="yhat"),colour="red",alpha=alpha) +
+    ylim(min = min(partial_data$yhat,pred_data[point,"yhat"]) - 0.5*partial_span, 
+         max = max(partial_data$yhat,pred_data[point,"yhat"]) + 0.5*partial_span) +
+    theme_bw(base_size = 20)
+  
+  if (plot_point) {
+    plot = plot + geom_point(data=pred_data[point,],aes_string(x=feature,y="yhat"))
+  }
+  
+  if (plot_lime) {
+    plot = plot + geom_line(data=lime_line(model, data, point, feature), aes_string(x=feature,y="yhat"), 
+                            color = "red",size = 1)
+  }
+  
+  return(plot)
+}
+
+point = 1
+p1 = plot_pd_lime(gam_model, sim_data, point, "x1", 0, FALSE, FALSE)
+p2 = plot_pd_lime(gam_model, sim_data, point, "x2", 0, FALSE, FALSE)
+p3 = plot_pd_lime(gam_model, sim_data, point, "x3", 0, FALSE, FALSE)
+p4 = plot_pd_lime(gam_model, sim_data, point, "x4", 0, FALSE, FALSE)
+
+grid.arrange(p1,p2,p3,p4)
+
+```
+
+```{r}
+
+point = 1
+p1 = plot_pd_lime(gam_model, sim_data, point, "x1", 0, TRUE, FALSE)
+p2 = plot_pd_lime(gam_model, sim_data, point, "x2", 0, TRUE, FALSE)
+p3 = plot_pd_lime(gam_model, sim_data, point, "x3", 0, TRUE, FALSE)
+p4 = plot_pd_lime(gam_model, sim_data, point, "x4", 0, TRUE, FALSE)
+
+grid.arrange(p1,p2,p3,p4)
+
+
+```
+
+```{r}
+
+
+point = 1
+p1 = plot_pd_lime(gam_model, sim_data, point, "x1", 0.5, TRUE, FALSE)
+p2 = plot_pd_lime(gam_model, sim_data, point, "x2", 0.5, TRUE, FALSE)
+p3 = plot_pd_lime(gam_model, sim_data, point, "x3", 0.5, TRUE, FALSE)
+p4 = plot_pd_lime(gam_model, sim_data, point, "x4", 0.5, TRUE, FALSE)
+
+grid.arrange(p1,p2,p3,p4)
+
+```
+
+```{r}
+
+
+point = 1
+p1 = plot_pd_lime(gam_model, sim_data, point, "x1", 0.1, TRUE, TRUE)
+p2 = plot_pd_lime(gam_model, sim_data, point, "x2", 0.1, TRUE, TRUE)
+p3 = plot_pd_lime(gam_model, sim_data, point, "x3", 0.1, TRUE, TRUE)
+p4 = plot_pd_lime(gam_model, sim_data, point, "x4", 0.1, TRUE, TRUE)
+
+grid.arrange(p1,p2,p3,p4)
+
+explainer = lime(sim_data,model = gam_model, bin_continuous = FALSE)
+explanations = explain(sim_data[point,c("x1","x2","x3","x4")],explainer,n_features = 4)
+write.table(explanations[,c("feature","feature_value","feature_weight")], "clipboard", sep="\t", row.names=FALSE)
+
+```
+
+```{r}
+
+
+point = 500
+p1 = plot_pd_lime(gam_model, sim_data, point, "x1", 0.1, TRUE, TRUE)
+p2 = plot_pd_lime(gam_model, sim_data, point, "x2", 0.1, TRUE, TRUE)
+p3 = plot_pd_lime(gam_model, sim_data, point, "x3", 0.1, TRUE, TRUE)
+p4 = plot_pd_lime(gam_model, sim_data, point, "x4", 0.1, TRUE, TRUE)
+
+grid.arrange(p1,p2,p3,p4)
+
+explainer = lime(sim_data,model = gam_model, bin_continuous = FALSE)
+explanations = explain(sim_data[point,c("x1","x2","x3","x4")],explainer,n_features = 4)
+write.table(explanations[,c("feature","feature_value","feature_weight")], "clipboard", sep="\t", row.names=FALSE)
+
+```
+
+## LIME - Forest
+
+```{r}
+
+
+point = 1
+p1 = plot_pd_lime(forest_model, sim_data, point, "x1", 0.1, TRUE, TRUE)
+p2 = plot_pd_lime(forest_model, sim_data, point, "x2", 0.1, TRUE, TRUE)
+p3 = plot_pd_lime(forest_model, sim_data, point, "x3", 0.1, TRUE, TRUE)
+p4 = plot_pd_lime(forest_model, sim_data, point, "x4", 0.1, TRUE, TRUE)
+
+grid.arrange(p1,p2,p3,p4)
+
+explainer = lime(sim_data,model = forest_model, bin_continuous = FALSE)
+explanations = explain(sim_data[point,c("x1","x2","x3","x4")],explainer,n_features = 4)
+write.table(explanations[,c("feature","feature_value","feature_weight")], "clipboard", sep="\t", row.names=FALSE)
+
+```
+
+# Shapley Values
+
+## Shapley Table Examples - GAM
+
+```{r}
+
+ex_data = sim_data[1:7,c("x1","x2","x3","x4")]
+q_data = ex_data[1,]
+
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+write.table(q_data,"clipboard", sep="\t", row.names=FALSE)
+
+ex_data$yhat = as.vector(predict(gam_model,ex_data))
+mean_pred = mean(ex_data$yhat)
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+
+ex_data$x1 = q_data$x1
+ex_data$yhat = as.vector(predict(gam_model,ex_data))
+x1_delta = mean(ex_data$yhat) - mean_pred
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+ex_data = sim_data[1:7,c("x1","x2","x3","x4")]
+ex_data$x2 = q_data$x2
+ex_data$yhat = as.vector(predict(gam_model,ex_data))
+x2_delta = mean(ex_data$yhat) - mean_pred
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+ex_data$x1 = q_data$x1
+ex_data$yhat = as.vector(predict(gam_model,ex_data))
+x1x2_delta = mean(ex_data$yhat) - mean_pred
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+print(x1_delta)
+print(x2_delta)
+print(x1x2_delta)
+
+```
+
+## Shapley Table Examples - Forest
+
+```{r}
+
+ex_data = sim_data[1:7,c("x1","x2","x3","x4")]
+q_data = ex_data[1,]
+
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+write.table(q_data,"clipboard", sep="\t", row.names=FALSE)
+
+ex_data$yhat = predict(forest_model,ex_data)
+mean_pred = mean(ex_data$yhat)
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+
+ex_data$x1 = q_data$x1
+ex_data$yhat = predict(forest_model,ex_data)
+x1_delta = mean(ex_data$yhat) - mean_pred
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+ex_data = sim_data[1:7,c("x1","x2","x3","x4")]
+ex_data$x2 = q_data$x2
+ex_data$yhat = predict(forest_model,ex_data)
+x2_delta = mean(ex_data$yhat) - mean_pred
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+ex_data$x1 = q_data$x1
+ex_data$yhat = predict(forest_model,ex_data)
+x1x2_delta = mean(ex_data$yhat) - mean_pred
+write.table(ex_data, "clipboard", sep="\t", row.names=FALSE)
+
+print(x1_delta)
+print(x2_delta)
+print(x1x2_delta)
+
+```
+
+## Plot Shapley Values - GAM
+
+```{r}
+
+sim_data_x = sim_data[,c("x1","x2","x3","x4")]
+
+shapley_line = function(model,point,feature) {
+
+  predictor = Predictor$new(model, data=sim_data_x, y = sim_data$y)
+  shapley = Shapley$new(predictor, x.interest = sim_data_x[point,], sample.size = 1000.)
+  shapley_values = shapley$results
+
+  intercept = shapley_values[shapley_values$feature == feature,"phi"][[1]]
+  
+  plot_domain = seq(min(sim_data[,feature]),max(sim_data[,feature]),0.1)
+  exp_pred = plot_domain * 0 + intercept
+
+  out = data.frame(feature = plot_domain, "yhat" = exp_pred)
+  names(out)[names(out) == "feature"] = feature
+
+  return(out)
+}
+
+point = 1
+pred_data = sim_data
+pred_data$yhat = predict(gam_model,pred_data)
+p1 = partial(gam_model,pred.var = "x1", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x1",y="yhat")) +
+  geom_line(data=shapley_line(gam_model, point, "x1"), aes(x1,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+p2 = partial(gam_model,pred.var = "x2", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x2",y="yhat")) +
+  geom_line(data=shapley_line(gam_model, point, "x2"), aes(x2,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+p3 = partial(gam_model,pred.var = "x3", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x3",y="yhat")) +
+  geom_line(data=shapley_line(gam_model, point, "x3"), aes(x3,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+p4 = partial(gam_model,pred.var = "x4", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x4",y="yhat")) +
+  geom_line(data=shapley_line(gam_model, point, "x4"), aes(x4,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+grid.arrange(p1,p2,p3,p4)
+
+predictor = Predictor$new(gam_model, data=sim_data_x, y = sim_data$y)
+shapley = Shapley$new(predictor, x.interest = sim_data_x[point,], sample.size = 1000.)
+shapley_values = shapley$results
+write.table(shapley_values, "clipboard", sep="\t", row.names=FALSE)
+
+```
+
+## Plot Shapley Values - Forest
+
+```{r}
+
+point = 1
+pred_data = sim_data
+pred_data$yhat = predict(forest_model,pred_data)
+p1 = partial(forest_model,pred.var = "x1", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x1",y="yhat")) +
+  geom_line(data=shapley_line(forest_model, point, "x1"), aes(x1,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+p2 = partial(forest_model,pred.var = "x2", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x2",y="yhat")) +
+  geom_line(data=shapley_line(forest_model, point, "x2"), aes(x2,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+p3 = partial(forest_model,pred.var = "x3", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x3",y="yhat")) +
+  geom_line(data=shapley_line(forest_model, point, "x3"), aes(x3,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+p4 = partial(forest_model,pred.var = "x4", plot = TRUE, plot.engine = "ggplot2") + 
+  geom_point(data=pred_data[point,],aes_string(x="x4",y="yhat")) +
+  geom_line(data=shapley_line(forest_model, point, "x4"), aes(x4,yhat), color = "red") + 
+  theme_bw(base_size = 20)
+
+grid.arrange(p1,p2,p3,p4)
+
+predictor = Predictor$new(forest_model, data=sim_data_x, y = sim_data$y)
+shapley = Shapley$new(predictor, x.interest = sim_data_x[point,], sample.size = 1000.)
+shapley_values = shapley$results
+write.table(shapley_values, "clipboard", sep="\t", row.names=FALSE)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
